@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVERHEAT UI — Executive Tailwind CSS Admin OS & Component Library</title>
+  <meta name="description" content="OVERHEAT UI adalah ekosistem template panel admin & UI kit berbasis Tailwind CSS murni. Desain elegan anti-AI slop, high-contrast, dan siap copy-paste.">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Standalone Tailwind CSS CDN for instant aaPanel / Docker / Web Server usage -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca'
+            },
+            obsidian: {
+              900: '#0c0e14',
+              800: '#10131c',
+              700: '#151924',
+              600: '#1c2130'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .light .bg-grid-pattern {
+      background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+    }
+    .glass-card {
+      background: rgba(21, 25, 36, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .light .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body class="bg-obsidian-900 text-slate-100 font-sans antialiased selection:bg-indigo-500/20 selection:text-indigo-400 min-h-screen bg-grid-pattern transition-colors duration-300">
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-bold shadow-2xl flex items-center gap-2.5">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      <span id="toast-msg">Perintah disalin ke clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="sticky top-0 z-40 border-b border-white/10 glass-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-white text-slate-900 flex items-center justify-center font-black text-sm shadow-sm">
+          O
+        </div>
+        <div>
+          <span class="font-extrabold text-base tracking-tight text-white">OVERHEAT</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/10 text-indigo-300 font-bold border border-white/10 ml-1">UI KIT</span>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-400">
+        <a href="#features" class="hover:text-white transition-colors">Fitur Unggulan</a>
+        <a href="#components" class="hover:text-white transition-colors">Komponen</a>
+        <a href="#deploy" class="hover:text-white transition-colors">aaPanel & Docker</a>
+        <a href="https://github.com/frambudi75/Overheat-ui-tailwind" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
+          GitHub
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/" target="_blank" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-700 active:scale-95 text-white text-xs font-bold transition-all shadow-lg shadow-indigo-600/20 inline-flex items-center gap-2">
+          <span>Buka Panel Demo</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-20 pb-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-8">
+      
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-indigo-300">
+        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+        <span>Anti-AI Slop • Pure Tailwind CSS v4 & Modular UI Kit</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
+        Panel Admin Elegan untuk Semua Project Web Anda.
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
+        Koleksi komponen modular siap <em>copy-paste</em> dengan kontras tinggi, navigasi keyboard power-user, dan bebas dari gradasi neon murahan.
+      </p>
+
+      <!-- Action Buttons & Clone Box -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        <a href="/" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white text-sm font-bold transition-all shadow-xl shadow-indigo-600/25 flex items-center justify-center gap-2">
+          <span>Jelajahi Live Demo (7 Halaman)</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+
+        <div class="w-full sm:w-auto flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-obsidian-800 border border-white/10 text-xs font-mono text-slate-300 select-all cursor-pointer hover:border-white/20 transition-all" onclick="copyGitClone()">
+          <span class="text-indigo-400">$</span>
+          <span>git clone https://github.com/frambudi75/Overheat-ui-tailwind.git</span>
+          <svg class="w-4 h-4 text-slate-400 hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Preview Frame -->
+      <div class="pt-10 max-w-5xl mx-auto">
+        <div class="rounded-2xl border border-white/10 shadow-2xl bg-obsidian-800/80 p-2 sm:p-4 backdrop-blur">
+          <div class="flex items-center gap-2 px-3 py-2 border-b border-white/5 text-xs text-slate-400 font-mono">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+            <span class="ml-2 text-slate-500">https://overheat.id/admin/overview</span>
+          </div>
+          <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left p-2">
+            <div class="p-4 rounded-xl bg-obsidian-700 border border-white/5">
+              <div class="text-xs text-slate-400 uppercase font-mono">Gross Revenue</div>
+              <div class="text-2xl font-extrabold font-mono text-white mt-2">$148,820</div>
+              <div class="text-xs text-emerald-400 mt-1 font-bold">↑ 18.4% Bulan Ini</div>
+            </div>
+            <div class="p-4 rounded-xl bg-obsidian-700 border border-white/5">
+              <div class="text-xs text-slate-400 uppercase font-mono">Pelanggan Aktif</div>
+              <div class="text-2xl font-extrabold font-mono text-white mt-2">4,892</div>
+              <div class="text-xs text-emerald-400 mt-1 font-bold">↑ 12.1% Pertumbuhan</div>
+            </div>
+            <div class="p-4 rounded-xl bg-obsidian-700 border border-white/5">
+              <div class="text-xs text-slate-400 uppercase font-mono">Multi-Currency</div>
+              <div class="text-2xl font-extrabold font-mono text-indigo-400 mt-2">USD & IDR</div>
+              <div class="text-xs text-slate-400 mt-1">Konversi Real-time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features" class="py-20 border-t border-white/10 bg-obsidian-800/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+      <div class="text-center space-y-3 max-w-2xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-white tracking-tight">Dibuat untuk Standar Produk Kelas Dunia</h2>
+        <p class="text-sm text-slate-400">Setiap piksel dan interaksi dirancang untuk memberikan pengalaman pengguna yang sangat cepat, presisi, dan intuitif.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold">
+            🛡️
+          </div>
+          <h3 class="text-base font-bold text-white">Anti-AI Slop & High Contrast</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Menolak gradasi neon acak yang membuat sakit mata. Mengutamakan mode gelap Obsidian pekat dan mode terang Swiss Slate yang tajam.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
+            ⌨️
+          </div>
+          <h3 class="text-base font-bold text-white">Pintasan Keyboard Power-User</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Operasikan dashboard dengan keyboard: <code>⌘K</code> untuk Command Bar, <code>?</code> untuk menu pintasan, dan <code>G + D/O/A</code> untuk navigasi dua tombol.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">
+            📈
+          </div>
+          <h3 class="text-base font-bold text-white">Grafik Interaktif & Inspector</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Filter rentang periode Harian, Mingguan, Bulanan, dan Tahunan lengkap dengan garis crosshair dan tooltip melayang saat kursor digerakkan.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
+            💵
+          </div>
+          <h3 class="text-base font-bold text-white">Dual Currency (USD & IDR)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Format angka otomatis disesuaikan. Di mode Rupiah menggunakan singkatan eksekutif <code>Rp 2,35 M</code> sehingga bebas dari teks terpotong.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">
+            🧩
+          </div>
+          <h3 class="text-base font-bold text-white">Koleksi Komponen Modular</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Tersedia tombol, kartu, tabel data, modal form, switch, avatar, dan banner notifikasi yang siap di-copy-paste ke framework apa pun.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold">
+            📱
+          </div>
+          <h3 class="text-base font-bold text-white">100% Mobile & Tablet Ready</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Dilengkapi off-canvas drawer slide-in untuk navigasi HP dan layout adaptif untuk segala resolusi layar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deploy Guide (aaPanel & Docker) -->
+  <section id="deploy" class="py-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+      <div class="text-center space-y-3 max-w-2xl mx-auto">
+        <span class="px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 font-mono text-[10px] font-bold border border-brand-500/20">DEPLOYMENT READY</span>
+        <h2 class="text-3xl font-extrabold text-white tracking-tight">Siap Pasang di aaPanel & Docker</h2>
+        <p class="text-sm text-slate-400">Deploy landing page atau template admin ini ke server VPS Anda hanya dalam 1 menit.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- aaPanel Guide -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">AA</span>
+            <h3 class="text-base font-bold text-white">Deploy di aaPanel (Nginx / Apache)</h3>
+          </div>
+          <ol class="space-y-2 text-xs text-slate-300 list-decimal list-inside leading-relaxed">
+            <li>Buka menu <strong>Website ➔ Add Site</strong> di dashboard aaPanel.</li>
+            <li>Upload seluruh isi folder ini ke direktori <code>/www/wwwroot/domain-anda.com/</code>.</li>
+            <li>Aktifkan SSL Let's Encrypt dengan 1 klik. Selesai! Web langsung live.</li>
+          </ol>
+        </div>
+
+        <!-- Docker Guide -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">🐳</span>
+            <h3 class="text-base font-bold text-white">Deploy dengan Docker Compose</h3>
+          </div>
+          <p class="text-xs text-slate-400">Cukup jalankan satu perintah di terminal server VPS Anda:</p>
+          <div class="p-3 rounded-lg bg-black/40 border border-white/10 font-mono text-xs text-emerald-400">
+            docker compose up -d
+          </div>
+          <p class="text-[11px] text-slate-400">Container Nginx Alpine super ringan langsung berjalan di port <code>8080</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-white/10 bg-obsidian-900 text-center text-xs text-slate-500 space-y-3">
+    <div class="flex items-center justify-center gap-2">
+      <div class="w-6 h-6 rounded-md bg-white text-slate-900 flex items-center justify-center font-bold text-xs">O</div>
+      <span class="font-extrabold text-white text-sm">OVERHEAT UI</span>
+    </div>
+    <p>Dibuat dengan dedikasi tinggi oleh <strong><a href="https://github.com/frambudi75" class="text-slate-300 hover:text-white underline">frambudi75</a></strong>.</p>
+    <p>Lisensi MIT • Open Source untuk komunitas pengembang web.</p>
+  </footer>
+
+  <script>
+    function copyGitClone() {
+      navigator.clipboard.writeText('git clone https://github.com/frambudi75/Overheat-ui-tailwind.git');
+      const toast = document.getElementById('toast');
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
