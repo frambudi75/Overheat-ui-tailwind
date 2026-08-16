@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Rounded Background -->
+  <rect width="64" height="64" rx="16" fill="#0c0e14"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  
+  <!-- Outer Ring (O) -->
+  <circle cx="32" cy="32" r="18" stroke="#4f46e5" stroke-width="4" stroke-linecap="round" stroke-dasharray="85 30"/>
+  
+  <!-- Inner Flame / Energy Core -->
+  <path d="M32 20C32 20 37 26 37 30C37 32.7614 34.7614 35 32 35C29.2386 35 27 32.7614 27 30C27 28 28.5 25.5 30 24C30 27 32 28.5 32 28.5C32 28.5 31 26 32 20Z" fill="#ffffff"/>
+  
+  <!-- Bottom Dynamic Glow Dot -->
+  <circle cx="32" cy="42" r="2.5" fill="#10b981"/>
+</svg>
