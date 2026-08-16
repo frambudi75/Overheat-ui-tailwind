@@ -15,6 +15,10 @@ dist-ssr
 *.rar
 *.tar.gz
 
+# Local promotion site (kept only on local server)
+promosi/
+promosi
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
