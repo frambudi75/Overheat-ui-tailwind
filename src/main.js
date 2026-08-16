@@ -130,7 +130,8 @@ const pageMeta = {
   customers: { section: 'CRM', title: 'Data Pelanggan' },
   products: { section: 'Manajemen Produk', title: 'Katalog & Paket' },
   discounts: { section: 'Marketing', title: 'Diskon & Voucher' },
-  components: { section: 'UI Kit & Design System', title: 'Koleksi Komponen UI (Shadcn Style)' },
+  components: { section: 'UI Kit & Design System', title: 'Koleksi Komponen UI (OVERHEAT KIT)' },
+  auth: { section: 'Autentikasi', title: 'Halaman Login & Register (Auth)' },
   settings: { section: 'Sistem', title: 'Pengaturan Toko' },
 };
 
@@ -263,7 +264,7 @@ function renderOrdersTable() {
   if (filtered.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="7" class="py-8 text-center text-[var(--text-muted)] text-xs">
+        <td colspan="8" class="py-8 text-center text-[var(--text-muted)] text-xs">
           Tidak ada transaksi yang cocok dengan filter atau kata kunci pencarian.
         </td>
       </tr>
@@ -289,6 +290,9 @@ function renderOrdersTable() {
 
     return `
       <tr class="hover:bg-slate-50 dark:hover:bg-white/[0.03] transition-colors duration-150 group">
+        <td class="py-3.5 px-3 text-center">
+          <input type="checkbox" class="order-row-checkbox rounded border-slate-300 dark:border-white/20 text-indigo-600 focus:ring-0 cursor-pointer" data-id="${order.id}">
+        </td>
         <td class="py-3.5 px-4">
           <div class="flex items-center gap-2.5">
             <div class="w-7 h-7 rounded-full bg-slate-800 text-white dark:bg-slate-700 flex items-center justify-center font-bold text-xs">
@@ -323,6 +327,9 @@ function renderOrdersTable() {
       </tr>
     `;
   }).join('');
+
+  // Attach Checkbox Change Listeners
+  attachCheckboxListeners();
 
   document.querySelectorAll('.btn-view-invoice').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -416,6 +423,54 @@ function closeOrderDrawer() {
   modal.classList.add('opacity-0');
   box.classList.add('translate-x-full');
   setTimeout(() => modal.classList.add('hidden'), 250);
+}
+
+// Bulk Selection Logic
+let selectedOrderIds = new Set();
+
+function attachCheckboxListeners() {
+  const selectAll = document.getElementById('select-all-orders');
+  const rowCheckboxes = document.querySelectorAll('.order-row-checkbox');
+
+  if (selectAll) {
+    selectAll.checked = rowCheckboxes.length > 0 && Array.from(rowCheckboxes).every(cb => selectedOrderIds.has(cb.getAttribute('data-id')));
+    selectAll.onchange = (e) => {
+      const isChecked = e.target.checked;
+      rowCheckboxes.forEach(cb => {
+        const id = cb.getAttribute('data-id');
+        cb.checked = isChecked;
+        if (isChecked) selectedOrderIds.add(id);
+        else selectedOrderIds.delete(id);
+      });
+      updateBulkBar();
+    };
+  }
+
+  rowCheckboxes.forEach(cb => {
+    const id = cb.getAttribute('data-id');
+    cb.checked = selectedOrderIds.has(id);
+    cb.onchange = (e) => {
+      if (e.target.checked) selectedOrderIds.add(id);
+      else selectedOrderIds.delete(id);
+      if (selectAll) selectAll.checked = Array.from(rowCheckboxes).every(c => selectedOrderIds.has(c.getAttribute('data-id')));
+      updateBulkBar();
+    };
+  });
+}
+
+function updateBulkBar() {
+  const bar = document.getElementById('floating-bulk-bar');
+  const countEl = document.getElementById('bulk-selected-count');
+  if (!bar || !countEl) return;
+
+  const count = selectedOrderIds.size;
+  countEl.innerText = count;
+
+  if (count > 0) {
+    bar.classList.remove('translate-y-28');
+  } else {
+    bar.classList.add('translate-y-28');
+  }
 }
 
 // Live Sales Stream
@@ -1117,6 +1172,79 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.innerWidth < 768) closeMobileSidebar();
     });
   });
+
+  // Announcement Banner Close
+  const btnCloseAnnounce = document.getElementById('btn-close-announcement');
+  const announceBanner = document.getElementById('system-announcement-banner');
+  if (btnCloseAnnounce && announceBanner) {
+    btnCloseAnnounce.addEventListener('click', () => {
+      announceBanner.classList.add('-translate-y-full', 'opacity-0');
+      setTimeout(() => announceBanner.remove(), 300);
+    });
+  }
+
+  // Floating Bulk Action Buttons
+  const btnBulkPaid = document.getElementById('btn-bulk-mark-paid');
+  const btnBulkExport = document.getElementById('btn-bulk-export');
+  const btnBulkDelete = document.getElementById('btn-bulk-delete');
+  const btnBulkCancel = document.getElementById('btn-bulk-cancel');
+
+  if (btnBulkPaid) {
+    btnBulkPaid.addEventListener('click', () => {
+      let count = 0;
+      ordersData.forEach(order => {
+        if (selectedOrderIds.has(order.id)) {
+          order.status = 'PAID';
+          count++;
+        }
+      });
+      selectedOrderIds.clear();
+      renderOrdersTable();
+      updateBulkBar();
+      showToast(`${count} transaksi berhasil ditandai LUNAS!`, 'success');
+    });
+  }
+
+  if (btnBulkExport) {
+    btnBulkExport.addEventListener('click', () => {
+      const selectedOrders = ordersData.filter(o => selectedOrderIds.has(o.id));
+      if (selectedOrders.length === 0) return;
+      let csvContent = "Invoice ID,Customer Name,Customer Email,Plan,Amount (USD),Status,Date\n";
+      selectedOrders.forEach(row => {
+        csvContent += `"${row.id}","${row.name}","${row.email}","${row.plan}",${row.amount},"${row.status}","${row.date}"\n`;
+      });
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `overheat_selected_orders_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast(`Mengekspor ${selectedOrders.length} data terpilih ke CSV!`, 'success');
+    });
+  }
+
+  if (btnBulkDelete) {
+    btnBulkDelete.addEventListener('click', () => {
+      const count = selectedOrderIds.size;
+      if (confirm(`Yakin ingin menghapus ${count} data transaksi terpilih?`)) {
+        ordersData = ordersData.filter(o => !selectedOrderIds.has(o.id));
+        selectedOrderIds.clear();
+        renderOrdersTable();
+        updateBulkBar();
+        showToast(`${count} transaksi telah dihapus dari sistem.`, 'error');
+      }
+    });
+  }
+
+  if (btnBulkCancel) {
+    btnBulkCancel.addEventListener('click', () => {
+      selectedOrderIds.clear();
+      renderOrdersTable();
+      updateBulkBar();
+    });
+  }
 
   // Initialize
   updateAllCurrencies();

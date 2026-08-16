@@ -1,0 +1,75 @@
+<!-- OVERHEAT UI: Tax Invoice & Print-Optimized Receipt Component -->
+
+<div class="p-8 rounded-2xl bg-white dark:bg-[#151924] border border-slate-200 dark:border-white/10 shadow-sm max-w-2xl mx-auto space-y-6">
+  <!-- Invoice Header -->
+  <div class="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-white/10">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-lg">O</div>
+      <div>
+        <h3 class="font-extrabold text-base text-slate-900 dark:text-white">OVERHEAT CLOUD</h3>
+        <p class="text-xs text-slate-500">PT Overheat Solusi Teknologi</p>
+      </div>
+    </div>
+    <div class="text-right font-mono">
+      <div class="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/20 inline-block">
+        #ORD-94820
+      </div>
+      <div class="text-[11px] text-slate-400 mt-1">17 Agu 2026, 14:20 WIB</div>
+    </div>
+  </div>
+
+  <!-- Customer & Store Info -->
+  <div class="grid grid-cols-2 gap-4 text-xs">
+    <div>
+      <span class="text-slate-400 font-medium">DITAGIHKAN KEPADA:</span>
+      <div class="font-bold text-slate-900 dark:text-white mt-1">Jessica Pratama</div>
+      <div class="text-slate-500">jessica@perusahaan.com</div>
+      <div class="text-slate-500">Jakarta Selatan, Indonesia</div>
+    </div>
+    <div class="text-right">
+      <span class="text-slate-400 font-medium">METODE PEMBAYARAN:</span>
+      <div class="font-bold text-slate-900 dark:text-white mt-1">Kartu Kredit Visa (•••• 4242)</div>
+      <span class="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-mono font-bold mt-1 inline-block">
+        TERVERIFIKASI / LUNAS
+      </span>
+    </div>
+  </div>
+
+  <!-- Items Table -->
+  <div class="border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden text-xs">
+    <table class="w-full text-left">
+      <thead class="bg-slate-50 dark:bg-white/[0.02] border-b border-slate-200 dark:border-white/10 text-slate-500 font-semibold">
+        <tr>
+          <th class="py-3 px-4">Deskripsi Layanan</th>
+          <th class="py-3 px-4 text-center">Durasi</th>
+          <th class="py-3 px-4 text-right">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+        <tr>
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">Enterprise Cloud Suite (Tier 1)</td>
+          <td class="py-3 px-4 text-center text-slate-500">1 Bulan</td>
+          <td class="py-3 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">$890.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Total Calculation -->
+  <div class="flex justify-end pt-2 text-xs">
+    <div class="w-60 space-y-2">
+      <div class="flex justify-between text-slate-500">
+        <span>Subtotal</span>
+        <span class="font-mono text-slate-900 dark:text-white">$890.00</span>
+      </div>
+      <div class="flex justify-between text-slate-500">
+        <span>PPN (11%)</span>
+        <span class="font-mono text-slate-900 dark:text-white">$0.00 (Termasuk)</span>
+      </div>
+      <div class="flex justify-between font-bold text-sm text-slate-900 dark:text-white pt-2 border-t border-slate-200 dark:border-white/10">
+        <span>Total Pembayaran</span>
+        <span class="font-mono text-indigo-600 dark:text-indigo-400">$890.00</span>
+      </div>
+    </div>
+  </div>
+</div>
