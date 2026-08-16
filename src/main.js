@@ -134,7 +134,7 @@ const pageMeta = {
   settings: { section: 'Sistem', title: 'Pengaturan Toko' },
 };
 
-// Component Snippets for 1-Click Copy (Shadcn Style)
+// Component Snippets for 1-Click Copy (OVERHEAT UI KIT)
 const uiSnippets = {
   button: `<button class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-bold transition-all inline-flex items-center gap-2 shadow-sm">
   <span>Primary Action</span>
@@ -155,7 +155,28 @@ const uiSnippets = {
     <div class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white">$148,820</div>
     <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">↑ 18.4%</span>
   </div>
-</div>`
+</div>`,
+  accordion: `<details class="group p-3 rounded-lg bg-white dark:bg-[#151924] border border-slate-200 dark:border-white/10 text-xs">
+  <summary class="flex items-center justify-between cursor-pointer font-bold text-slate-900 dark:text-white list-none">
+    <span>Pertanyaan FAQ?</span>
+    <svg class="w-4 h-4 text-slate-400 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+  </summary>
+  <p class="mt-2 text-slate-600 dark:text-slate-300 leading-relaxed pt-2 border-t border-slate-100 dark:border-white/10">Jawaban lengkap di sini.</p>
+</details>`,
+  avatar: `<div class="flex items-center -space-x-2">
+  <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs border-2 border-white dark:border-[#151924]">J</div>
+  <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs border-2 border-white dark:border-[#151924]">A</div>
+  <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 flex items-center justify-center font-bold text-[10px] border-2 border-white dark:border-[#151924]">+4</div>
+</div>`,
+  alert: `<div class="p-3.5 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-3 text-xs text-emerald-800 dark:text-emerald-300">
+  <svg class="w-4 h-4 shrink-0 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+  <span><strong>Sukses!</strong> Transaksi telah berhasil diverifikasi.</span>
+</div>`,
+  switch: `<label class="inline-flex items-center gap-3 cursor-pointer">
+  <input type="checkbox" checked class="sr-only peer">
+  <div class="w-11 h-6 bg-slate-300 dark:bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 relative"></div>
+  <span class="text-xs font-medium text-slate-900 dark:text-white">Toggle Active</span>
+</label>`
 };
 
 // Switch Page
