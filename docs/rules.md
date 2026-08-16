@@ -4,9 +4,9 @@ Aturan ketat dan konvensi penulisan kode untuk menjaga kualitas kode dan estetik
 
 ---
 
-## 1. Aturan Desain (Anti-AI Slop Rules)
+## 1. Aturan Desain & Visual (Executive Design Principles)
 
-1. **Dilarang Menggunakan Gradasi Neon Berlebihan**:
+1. **Menghindari Gradasi Neon Berlebihan**:
    - ❌ Jangan pernah memakai gradasi norak seperti `from-purple-500 via-pink-500 to-orange-500` pada tombol atau kartu.
    - ✅ Gunakan warna solid berbobot seperti `bg-indigo-600` atau `bg-slate-900` dengan border taktil halus `border-slate-200` atau `border-white/10`.
 2. **Dilarang Menggunakan Emoji Kartun sebagai Icon Utama**:

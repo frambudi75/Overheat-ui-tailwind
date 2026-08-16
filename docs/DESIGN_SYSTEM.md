@@ -6,7 +6,7 @@ Panduan resmi token desain, palet warna, tipografi, dan komponen antarmuka **OVE
 
 ## 1. Prinsip Desain (Design Philosophy)
 
-1. **Anti-AI Slop**: Menolak gradasi neon acak yang membuat sakit mata (*purple-orange high glow blobs*). Mengutamakan palet solid, proporsional, dan elegan.
+1. **Minimalist Precision**: Menolak gradasi neon acak yang mengaburkan data (*purple-orange glow blobs*). Mengutamakan palet solid, proporsional, dan elegan.
 2. **High-Contrast Readability**: Memastikan seluruh teks, angka metrik, dan tabel memiliki rasio kontras WCAG AAA baik di mode gelap maupun terang.
 3. **Tactile Micro-Physics**: Tombol dan elemen interaktif memberikan *feedback* pegas halus (`active:scale-95` atau `active:scale-98`) saat diklik.
 4. **Data-Dense Yet Breathable**: Menampilkan metrik dalam struktur hierarki visual yang jelas tanpa membuat pengguna kewalahan.
