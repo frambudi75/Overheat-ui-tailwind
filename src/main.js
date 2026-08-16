@@ -209,6 +209,10 @@ function navigateToPage(pageKey) {
   window.location.hash = pageKey;
 }
 
+// Expose globally for inline onclick handlers
+window.navigateToPage = navigateToPage;
+window.formatMoney = formatMoney;
+
 // Toast Notification
 function showToast(message, type = 'info') {
   const container = document.getElementById('toast-container');
