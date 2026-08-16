@@ -1,0 +1,39 @@
+<!-- OVERHEAT UI: Interactive SVG Area Chart Component -->
+
+<div class="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-4">
+  <div class="flex items-center justify-between">
+    <div>
+      <h3 class="text-sm font-bold text-[var(--text-primary)]">Tren Arus Kas & Revenue</h3>
+      <p class="text-xs text-[var(--text-muted)]">Performa omzet kotor vs laba bersih bulanan.</p>
+    </div>
+    <div class="flex items-center gap-2 p-1 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs">
+      <button class="px-2.5 py-1 rounded-md bg-indigo-600 text-white font-medium">Harian</button>
+      <button class="px-2.5 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]">Mingguan</button>
+      <button class="px-2.5 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]">Bulanan</button>
+    </div>
+  </div>
+
+  <div class="h-60 w-full relative">
+    <svg class="w-full h-full overflow-visible" viewBox="0 0 900 240" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0"/>
+        </linearGradient>
+      </defs>
+      <!-- Grid Lines -->
+      <line x1="0" y1="60" x2="900" y2="60" stroke="currentColor" class="text-slate-200 dark:text-white/5" stroke-dasharray="4"/>
+      <line x1="0" y1="120" x2="900" y2="120" stroke="currentColor" class="text-slate-200 dark:text-white/5" stroke-dasharray="4"/>
+      <line x1="0" y1="180" x2="900" y2="180" stroke="currentColor" class="text-slate-200 dark:text-white/5" stroke-dasharray="4"/>
+      
+      <!-- Area Fill & Stroke -->
+      <path d="M0,230 L0,160 C150,110 300,170 450,120 C600,60 750,140 900,40 L900,230 Z" fill="url(#chartGrad)"/>
+      <path d="M0,160 C150,110 300,170 450,120 C600,60 750,140 900,40" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round"/>
+      <path d="M0,190 C150,150 300,195 450,155 C600,110 750,170 900,90" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="5,5"/>
+    </svg>
+  </div>
+
+  <div class="flex items-center justify-between text-xs text-[var(--text-muted)] pt-2 border-t border-[var(--border-subtle)] font-mono">
+    <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span class="text-indigo-600 dark:text-indigo-400 font-bold">Hari Ini</span>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<!-- OVERHEAT UI: Navigation Sidebar Component -->
+
+<aside class="w-64 min-h-screen bg-[var(--bg-sidebar)] border-r border-[var(--border-subtle)] flex flex-col justify-between p-3 select-none">
+  <div class="space-y-6">
+    <!-- Brand Header -->
+    <div class="px-3 py-2 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-md">O</div>
+        <div>
+          <div class="font-extrabold text-sm tracking-tight text-[var(--text-primary)]">OVERHEAT OS</div>
+          <div class="text-[10px] text-[var(--text-muted)] font-mono">v1.4.0 • Enterprise</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="space-y-1 text-xs">
+      <div class="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Menu Utama</div>
+      
+      <a href="#overview" class="flex items-center justify-between px-3 py-2 rounded-lg bg-indigo-600 text-white font-semibold">
+        <div class="flex items-center gap-3">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          <span>Dashboard</span>
+        </div>
+        <kbd class="text-[9px] font-mono bg-white/20 px-1 rounded text-white">G D</kbd>
+      </a>
+
+      <a href="#orders" class="flex items-center justify-between px-3 py-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+        <div class="flex items-center gap-3">
+          <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span>Pesanan</span>
+        </div>
+        <span class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-bold">8 Baru</span>
+      </a>
+
+      <a href="#settings" class="flex items-center justify-between px-3 py-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+        <div class="flex items-center gap-3">
+          <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Pengaturan</span>
+        </div>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bottom Profile -->
+  <div class="p-3 border-t border-[var(--border-subtle)] flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">H</div>
+      <div>
+        <div class="text-xs font-bold text-[var(--text-primary)]">Habibullah</div>
+        <div class="text-[10px] text-[var(--text-muted)]">admin@overheat.id</div>
+      </div>
+    </div>
+  </div>
+</aside>

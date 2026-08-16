@@ -1,0 +1,14 @@
+<!-- OVERHEAT UI: Toast Notification Popup Component -->
+
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none">
+  <!-- Success Toast -->
+  <div class="pointer-events-auto px-4 py-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-2xl flex items-center gap-3 animate-in slide-in-from-bottom-5 duration-300">
+    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+    <div class="text-xs font-medium text-[var(--text-primary)]">
+      Kunci API gateway berhasil disalin ke clipboard!
+    </div>
+    <button class="p-1 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)]" onclick="this.parentElement.remove()">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+</div>

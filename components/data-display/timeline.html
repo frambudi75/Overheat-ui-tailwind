@@ -1,0 +1,40 @@
+<!-- OVERHEAT UI: Activity & Audit Log Timeline Component -->
+
+<div class="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm max-w-lg space-y-6">
+  <div class="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
+    <h3 class="text-sm font-bold text-[var(--text-primary)]">Log Aktivitas & Audit Keamanan</h3>
+    <span class="text-xs text-[var(--text-muted)] font-mono">Real-time</span>
+  </div>
+
+  <div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[var(--border-subtle)]">
+    <!-- Item 1 -->
+    <div class="relative">
+      <div class="w-4 h-4 rounded-full bg-emerald-500 border-4 border-[var(--bg-surface)] absolute -left-6 top-0.5"></div>
+      <div>
+        <div class="text-xs font-bold text-[var(--text-primary)]">Pembayaran Berhasil Diverifikasi</div>
+        <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Invoice <span class="font-mono text-indigo-600 dark:text-indigo-400">#ORD-94820</span> senilai $890.00 oleh Jessica Pratama.</p>
+        <span class="text-[10px] text-[var(--text-muted)] font-mono mt-1 block">2 menit yang lalu</span>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="relative">
+      <div class="w-4 h-4 rounded-full bg-indigo-500 border-4 border-[var(--bg-surface)] absolute -left-6 top-0.5"></div>
+      <div>
+        <div class="text-xs font-bold text-[var(--text-primary)]">Kunci API Baru Dibuat</div>
+        <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Superadmin membuat token integrasi webhook untuk Stripe Gateway.</p>
+        <span class="text-[10px] text-[var(--text-muted)] font-mono mt-1 block">45 menit yang lalu</span>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="relative">
+      <div class="w-4 h-4 rounded-full bg-amber-500 border-4 border-[var(--bg-surface)] absolute -left-6 top-0.5"></div>
+      <div>
+        <div class="text-xs font-bold text-[var(--text-primary)]">Permintaan Refund Baru</div>
+        <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Pelanggan Marcus Aurelius mengajukan pengembalian dana tiket #ORD-94814.</p>
+        <span class="text-[10px] text-[var(--text-muted)] font-mono mt-1 block">3 jam yang lalu</span>
+      </div>
+    </div>
+  </div>
+</div>

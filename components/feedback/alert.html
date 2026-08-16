@@ -1,0 +1,21 @@
+<!-- OVERHEAT UI: Alert & Callout Banner Components -->
+
+<div class="space-y-3 max-w-xl">
+  <!-- Success Alert -->
+  <div class="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3 text-xs text-emerald-800 dark:text-emerald-300 shadow-xs">
+    <svg class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span><strong>Sukses!</strong> Pembayaran pesanan #ORD-94820 telah diverifikasi oleh gateway Stripe.</span>
+  </div>
+
+  <!-- Warning Alert -->
+  <div class="p-3.5 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center gap-3 text-xs text-amber-800 dark:text-amber-300 shadow-xs">
+    <svg class="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <span><strong>Perhatian:</strong> Kunci API gateway Anda akan kadaluarsa dalam 7 hari ke depan.</span>
+  </div>
+
+  <!-- Destructive / Error Alert -->
+  <div class="p-3.5 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center gap-3 text-xs text-rose-800 dark:text-rose-300 shadow-xs">
+    <svg class="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span><strong>Gagal:</strong> Terjadi anomali koneksi webhook ke endpoint server backend.</span>
+  </div>
+</div>
