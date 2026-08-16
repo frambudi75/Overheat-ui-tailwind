@@ -61,23 +61,44 @@ It provides an enterprise design system featuring crisp dual-theme support (*Obs
 
 ## Component Vault
 
-All components are located in `components/ui/` and can be copied directly into your project:
+The Overheat UI component ecosystem is categorized into 4 domain directories:
 
+### 1. Core UI Primitives (`components/ui/`)
 | Component | File Path | Description |
 | :--- | :--- | :--- |
-| **Buttons** | [`components/ui/button.html`](components/ui/button.html) | Primary, secondary raised, outline, ghost, and destructive actions. |
-| **Badges** | [`components/ui/badge.html`](components/ui/badge.html) | Status pills (LUNAS, MENUNGGU, REFUND) and customer tier labels. |
-| **Card (KPI)** | [`components/ui/card.html`](components/ui/card.html) | Metric stat cards with trend badges and embedded sparklines. |
-| **Inputs** | [`components/ui/input.html`](components/ui/input.html) | Search inputs with kbd badges, password reveals, and select menus. |
-| **Data Table** | [`components/ui/table.html`](components/ui/table.html) | Sortable table with checkbox selection and customer avatars. |
+| **Button** | [`components/ui/button.html`](components/ui/button.html) | Primary, secondary raised, outline, ghost, and destructive actions. |
+| **Input** | [`components/ui/input.html`](components/ui/input.html) | Search inputs with kbd badges, password reveals, and select menus. |
 | **Dialog / Modal** | [`components/ui/dialog.html`](components/ui/dialog.html) | Backdrop-blurred modal dialogs for order details and edits. |
-| **Chart** | [`components/ui/chart.html`](components/ui/chart.html) | SVG revenue area chart with gradient fills and data grid. |
+| **Badge** | [`components/ui/badge.html`](components/ui/badge.html) | Status pills (LUNAS, MENUNGGU, REFUND) and customer tier labels. |
+| **Card** | [`components/ui/card.html`](components/ui/card.html) | Metric stat cards with trend badges and embedded sparklines. |
+| **Switch** | [`components/ui/switch.html`](components/ui/switch.html) | Physics-styled toggle switch with peer-checked state. |
 | **Accordion** | [`components/ui/accordion.html`](components/ui/accordion.html) | Animated collapsible FAQ items using HTML `<details>`. |
 | **Avatar Stack** | [`components/ui/avatar.html`](components/ui/avatar.html) | User initials with online indicator dot and team overlap stacks. |
-| **Alerts** | [`components/ui/alert.html`](components/ui/alert.html) | Success and warning callout banners with inline SVG icons. |
-| **Switch** | [`components/ui/switch.html`](components/ui/switch.html) | Physics-styled toggle switch with peer-checked state. |
 | **Auth Screen** | [`components/ui/auth.html`](components/ui/auth.html) | Split-screen login & registration layout with security indicators. |
-| **Tax Invoice** | [`components/ui/invoice.html`](components/ui/invoice.html) | Print-optimized A4 invoice receipt with itemized breakdown. |
+
+### 2. Data Display (`components/data-display/`)
+| Component | File Path | Description |
+| :--- | :--- | :--- |
+| **Data Table** | [`components/data-display/data-table.html`](components/data-display/data-table.html) | Sortable table with checkbox selection and customer avatars. |
+| **Stat Card** | [`components/data-display/stat-card.html`](components/data-display/stat-card.html) | Metric stat cards with trend badges and embedded sparklines. |
+| **Chart** | [`components/data-display/chart.html`](components/data-display/chart.html) | SVG revenue area chart with gradient fills and data grid. |
+| **Timeline** | [`components/data-display/timeline.html`](components/data-display/timeline.html) | Real-time audit log & activity stream timeline. |
+| **Tax Invoice** | [`components/data-display/invoice.html`](components/data-display/invoice.html) | Print-optimized A4 invoice receipt with itemized breakdown. |
+
+### 3. Navigation (`components/navigation/`)
+| Component | File Path | Description |
+| :--- | :--- | :--- |
+| **Sidebar** | [`components/navigation/sidebar.html`](components/navigation/sidebar.html) | Collapsible navigation sidebar with quota tracker & profile dropdown. |
+| **Command Palette** | [`components/navigation/command-palette.html`](components/navigation/command-palette.html) | Quick-search command dialog (`⌘K`) with keyboard shortcuts. |
+| **Breadcrumbs** | [`components/navigation/breadcrumbs.html`](components/navigation/breadcrumbs.html) | Hierarchical page trail navigation links. |
+
+### 4. Feedback & Status (`components/feedback/`)
+| Component | File Path | Description |
+| :--- | :--- | :--- |
+| **Toast** | [`components/feedback/toast.html`](components/feedback/toast.html) | Floating notification toast popups with status dot indicators. |
+| **Alert** | [`components/feedback/alert.html`](components/feedback/alert.html) | Success, warning, and error callout banners with inline SVG icons. |
+| **Skeleton** | [`components/feedback/skeleton.html`](components/feedback/skeleton.html) | Shimmer loading skeleton placeholders for data fetching states. |
+| **Empty State** | [`components/feedback/empty-state.html`](components/feedback/empty-state.html) | Zero-data empty state graphic with call-to-action triggers. |
 
 ---
 
@@ -86,20 +107,10 @@ All components are located in `components/ui/` and can be copied directly into y
 ```text
 Overheat-ui-tailwind/
 ├── components/
-│   └── ui/                     # Modular copy-paste component templates
-│       ├── accordion.html
-│       ├── alert.html
-│       ├── auth.html
-│       ├── avatar.html
-│       ├── badge.html
-│       ├── button.html
-│       ├── card.html
-│       ├── chart.html
-│       ├── dialog.html
-│       ├── input.html
-│       ├── invoice.html
-│       ├── switch.html
-│       └── table.html
+│   ├── ui/                     # Core Primitives (Button, Input, Dialog, Badge, Card, Switch)
+│   ├── data-display/           # Visual Data & Stats (DataTable, StatCard, Chart, Timeline, Invoice)
+│   ├── navigation/             # Routing Systems (Sidebar, Command Palette, Breadcrumbs)
+│   └── feedback/               # State & Notifications (Toast, Alert, Skeleton, EmptyState)
 ├── docs/                       # Architecture & design documentation
 │   ├── DESIGN_SYSTEM.md        # CSS tokens and color scales
 │   ├── ui-ux.md                # Interaction principles and keyboard shortcuts
