@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="obsidian-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVERHEAT — Executive Business & SaaS Platform</title>
+  
+  <!-- Premium Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="bg-subtle-grid min-h-screen text-[var(--text-primary)] antialiased flex selection:bg-indigo-500/20 selection:text-indigo-600 dark:selection:text-indigo-200">
+
+  <!-- Global Toast Notification Stack -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- Keyboard Shortcuts Cheat-sheet Modal (?) -->
+  <div id="shortcuts-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+    <div class="tactile-card w-full max-w-md overflow-hidden shadow-2xl scale-95 transition-all duration-200 border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
+        <div>
+          <h3 class="text-base font-bold text-[var(--text-primary)]">Pintasan Keyboard (Shortcuts)</h3>
+          <p class="text-xs text-[var(--text-muted)]">Navigasi instan layaknya power-user.</p>
+        </div>
+        <button id="btn-close-shortcuts" class="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="mt-4 space-y-2.5 text-xs">
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+          <span class="text-[var(--text-secondary)]">Buka Command Palette</span>
+          <kbd class="px-2 py-0.5 rounded font-mono font-bold bg-black/5 dark:bg-white/10 text-[var(--text-primary)]">⌘K / Ctrl+K</kbd>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+          <span class="text-[var(--text-secondary)]">Pindah ke Dashboard</span>
+          <kbd class="px-2 py-0.5 rounded font-mono font-bold bg-black/5 dark:bg-white/10 text-[var(--text-primary)]">G lalu D</kbd>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+          <span class="text-[var(--text-secondary)]">Pindah ke Analitik</span>
+          <kbd class="px-2 py-0.5 rounded font-mono font-bold bg-black/5 dark:bg-white/10 text-[var(--text-primary)]">G lalu A</kbd>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+          <span class="text-[var(--text-secondary)]">Pindah ke Pesanan</span>
+          <kbd class="px-2 py-0.5 rounded font-mono font-bold bg-black/5 dark:bg-white/10 text-[var(--text-primary)]">G lalu O</kbd>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+          <span class="text-[var(--text-secondary)]">Pindah ke Pelanggan</span>
+          <kbd class="px-2 py-0.5 rounded font-mono font-bold bg-black/5 dark:bg-white/10 text-[var(--text-primary)]">G lalu C</kbd>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+          <span class="text-[var(--text-secondary)]">Ganti Mata Uang (USD/IDR)</span>
+          <kbd class="px-2 py-0.5 rounded font-mono font-bold bg-black/5 dark:bg-white/10 text-[var(--text-primary)]">U</kbd>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Command Palette Modal (Cmd+K) -->
+  <div id="cmd-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-start justify-center pt-20 px-4">
+    <div id="cmd-card" class="tactile-card w-full max-w-2xl overflow-hidden shadow-xl scale-95 transition-all duration-200 border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
+      <div class="flex items-center px-4 py-3.5 border-b border-[var(--border-subtle)]">
+        <svg class="w-5 h-5 text-slate-400 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="cmd-input" type="text" placeholder="Ketik halaman atau perintah... (ESC untuk keluar)" class="w-full bg-transparent text-sm focus:outline-none text-[var(--text-primary)] placeholder-[var(--text-muted)] font-medium">
+        <kbd class="px-2 py-0.5 text-xs font-mono bg-black/5 dark:bg-white/5 border border-[var(--border-subtle)] rounded text-[var(--text-muted)]">ESC</kbd>
+      </div>
+      <div class="p-2 max-h-80 overflow-y-auto space-y-1 text-sm font-medium" id="cmd-items">
+        <div class="px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Pindah Halaman</div>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="overview">
+          <span class="flex items-center gap-2.5">📊 Dashboard & Overview</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G D</kbd>
+        </button>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="analytics">
+          <span class="flex items-center gap-2.5">📈 Revenue & Analitik</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G A</kbd>
+        </button>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="orders">
+          <span class="flex items-center gap-2.5">💳 Pesanan & Transaksi</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G O</kbd>
+        </button>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="customers">
+          <span class="flex items-center gap-2.5">👥 Data Pelanggan</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G C</kbd>
+        </button>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="products">
+          <span class="flex items-center gap-2.5">📦 Katalog & Paket</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G P</kbd>
+        </button>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="discounts">
+          <span class="flex items-center gap-2.5">🏷️ Diskon & Voucher</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G V</kbd>
+        </button>
+        <button class="cmd-row w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] transition-colors text-left" data-nav="settings">
+          <span class="flex items-center gap-2.5">⚙️ Pengaturan Toko</span>
+          <kbd class="text-xs font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-[var(--text-muted)]">G S</kbd>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Order Modal -->
+  <div id="modal-create-order" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+    <div class="tactile-card w-full max-w-lg overflow-hidden shadow-2xl scale-95 transition-all duration-200 border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-[var(--text-primary)]">Buat Pesanan Baru</h3>
+            <p class="text-xs text-[var(--text-muted)]">Terbitkan transaksi baru ke sistem.</p>
+          </div>
+        </div>
+        <button id="btn-close-modal" class="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="form-new-order" class="mt-4 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">NAMA PELANGGAN</label>
+          <input id="order-customer-name" type="text" required placeholder="Contoh: Jessica Pratama" class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-indigo-600">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">EMAIL PELANGGAN</label>
+          <input id="order-customer-email" type="email" required placeholder="jessica@perusahaan.com" class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-sm text-[var(--text-primary)] focus:outline-none focus:border-indigo-600">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">PAKET / PRODUK</label>
+            <select id="order-plan" class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] focus:outline-none focus:border-indigo-600">
+              <option value="Enterprise Cloud Suite">Enterprise Cloud Suite ($890)</option>
+              <option value="Pro Developer Plan">Pro Developer Plan ($450)</option>
+              <option value="Starter Cloud Tier">Starter Cloud Tier ($120)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">NOMINAL ($)</label>
+            <input id="order-amount" type="number" value="890" class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-primary)] focus:outline-none focus:border-indigo-600">
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-end gap-3">
+          <button type="button" id="btn-cancel-modal" class="tactile-btn px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-xs font-semibold text-[var(--text-secondary)]">Batal</button>
+          <button type="submit" class="tactile-btn tactile-btn-primary px-5 py-2 rounded-lg text-xs font-bold flex items-center gap-2">
+            Terbitkan Invoice
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Package Modal -->
+  <div id="modal-edit-package" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+    <div class="tactile-card w-full max-w-md overflow-hidden shadow-2xl scale-95 transition-all duration-200 border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
+        <div>
+          <h3 class="text-base font-bold text-[var(--text-primary)]" id="edit-pkg-title">Edit Paket Langganan</h3>
+          <p class="text-xs text-[var(--text-muted)]">Perbarui harga dan kuota paket.</p>
+        </div>
+        <button id="btn-close-edit-pkg" class="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="form-edit-package" class="mt-4 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">NAMA PAKET</label>
+          <input id="edit-pkg-name" type="text" required class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-sm text-[var(--text-primary)] focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">HARGA BULANAN ($)</label>
+          <input id="edit-pkg-price" type="number" required class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-sm font-mono text-[var(--text-primary)] focus:outline-none">
+        </div>
+
+        <div class="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-end gap-3">
+          <button type="button" id="btn-cancel-edit-pkg" class="tactile-btn px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 text-xs font-semibold text-[var(--text-secondary)]">Batal</button>
+          <button type="submit" class="tactile-btn tactile-btn-primary px-5 py-2 rounded-lg text-xs font-bold">
+            Simpan Perubahan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Slide-over Drawer for Order Detail -->
+  <div id="drawer-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex justify-end">
+    <div id="drawer-box" class="tactile-card w-full max-w-lg h-full border-l border-[var(--border-subtle)] p-6 flex flex-col transform translate-x-full transition-transform duration-300 rounded-none bg-[var(--bg-surface)] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-subtle)]">
+        <div>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold">TRANSAKSI RESMI</span>
+          <h3 id="drawer-order-id" class="text-lg font-bold text-[var(--text-primary)] mt-1">Invoice #ORD-94820</h3>
+        </div>
+        <button id="btn-close-drawer" class="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="mt-6 space-y-6 flex-1">
+        <div class="p-4 rounded-xl bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] space-y-3">
+          <div class="text-xs font-mono uppercase text-[var(--text-muted)]">Informasi Pelanggan</div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-800 text-white dark:bg-slate-700 flex items-center justify-center font-bold text-sm" id="drawer-avatar">
+              J
+            </div>
+            <div>
+              <div class="font-bold text-sm text-[var(--text-primary)]" id="drawer-customer-name">Jessica Pratama</div>
+              <div class="text-xs text-[var(--text-muted)]" id="drawer-customer-email">jessica@perusahaan.com</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="text-xs font-mono uppercase text-[var(--text-muted)]">Rincian Pembayaran</div>
+          <div class="p-4 rounded-xl bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] space-y-2.5 text-xs">
+            <div class="flex justify-between text-[var(--text-secondary)]">
+              <span>Paket / Produk:</span>
+              <span class="font-bold text-[var(--text-primary)]" id="drawer-product">Enterprise Cloud Suite</span>
+            </div>
+            <div class="flex justify-between text-[var(--text-secondary)]">
+              <span>Metode Bayar:</span>
+              <span class="font-mono text-[var(--text-muted)]">Stripe (Visa •••• 4242)</span>
+            </div>
+            <div class="pt-2 border-t border-[var(--border-subtle)] flex justify-between text-sm font-bold text-[var(--text-primary)]">
+              <span>Total Dibayar:</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-mono text-base" id="drawer-amount">$890.00</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="btn-print-receipt" class="tactile-btn tactile-btn-primary w-full py-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          Unduh Kuitansi PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div id="mobile-sidebar-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
+
+  <!-- ========================================== -->
+  <!-- LEFT SIDEBAR: OVERHEAT ADMIN NAVIGATION    -->
+  <!-- ========================================== -->
+  <aside id="sidebar" class="fixed md:static inset-y-0 left-0 w-64 bg-[var(--bg-sidebar)] border-r border-[var(--border-subtle)] shrink-0 flex flex-col justify-between z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 min-h-screen">
+    
+    <div>
+      <div class="h-16 px-5 flex items-center justify-between border-b border-[var(--border-subtle)]">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 flex items-center justify-center font-bold text-sm shadow-sm">
+            O
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-sm tracking-tight text-[var(--text-primary)]">OVERHEAT</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 font-bold border border-[var(--border-subtle)]">PRO</span>
+            </div>
+            <p class="text-[10px] text-[var(--text-muted)] font-medium">Business Admin OS</p>
+          </div>
+        </div>
+
+        <!-- Close button on Mobile Drawer -->
+        <button id="btn-close-mobile-sidebar" class="md:hidden p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/10">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Interactive Workspace Switcher Dropdown -->
+      <div class="p-3 relative">
+        <div id="btn-workspace-dropdown" class="tactile-card p-2.5 flex items-center justify-between text-xs cursor-pointer hover:border-slate-300 dark:hover:border-white/20 transition-all select-none">
+          <div class="flex items-center gap-2 overflow-hidden">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+            <div class="truncate">
+              <div class="font-bold text-[var(--text-primary)] truncate text-[11px]" id="current-workspace-name">Overheat Global Hub</div>
+              <div class="text-[10px] text-[var(--text-muted)]" id="current-workspace-region">Production Store • US-East</div>
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-[var(--text-muted)] shrink-0 transition-transform duration-200" id="workspace-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+
+        <!-- Workspace Dropdown Menu -->
+        <div id="workspace-menu" class="absolute left-3 right-3 top-16 tactile-card p-2 hidden z-50 shadow-2xl space-y-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+          <div class="px-2 py-1 text-[10px] font-mono uppercase text-[var(--text-muted)]">Pilih Toko / Workspace</div>
+          <button class="workspace-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 text-left text-xs font-semibold text-[var(--text-primary)]" data-name="Overheat Global Hub" data-region="Production Store • US-East">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Global Hub (US)
+            </span>
+            <span class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400">Aktif</span>
+          </button>
+          <button class="workspace-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 text-left text-xs text-[var(--text-secondary)]" data-name="Overheat Indo Store" data-region="Regional Store • Jakarta (IDR)">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-500"></span> Indo Store (JKT)
+            </span>
+          </button>
+          <button class="workspace-option w-full flex items-center justify-between px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 text-left text-xs text-[var(--text-secondary)]" data-name="Overheat Staging SandBox" data-region="Testing Environment • EU-Central">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> Sandbox Test
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="px-3 py-2 space-y-1 text-xs font-medium" id="sidebar-nav">
+        <div class="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Menu Utama</div>
+        
+        <a href="#overview" data-page="overview" class="nav-item active flex items-center justify-between px-3 py-2.5 rounded-lg bg-indigo-600 text-white shadow-sm transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            <span class="font-semibold">Dashboard & Overview</span>
+          </div>
+          <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+        </a>
+
+        <a href="#analytics" data-page="analytics" class="nav-item flex items-center justify-between px-3 py-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <span>Revenue & Analitik</span>
+          </div>
+          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-bold border border-emerald-200 dark:border-emerald-500/20">+18%</span>
+        </a>
+
+        <a href="#orders" data-page="orders" class="nav-item flex items-center justify-between px-3 py-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span>Pesanan & Transaksi</span>
+          </div>
+          <span class="text-[10px] font-mono text-[var(--text-muted)]" id="sidebar-order-count">8</span>
+        </a>
+
+        <a href="#customers" data-page="customers" class="nav-item flex items-center justify-between px-3 py-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span>Data Pelanggan</span>
+          </div>
+          <span class="text-[10px] font-mono text-[var(--text-muted)]">4.8k</span>
+        </a>
+
+        <div class="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] mt-4">Manajemen Produk</div>
+
+        <a href="#products" data-page="products" class="nav-item flex items-center justify-between px-3 py-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <span>Katalog & Paket</span>
+          </div>
+          <span class="text-[10px] font-mono text-[var(--text-muted)]">3 Paket</span>
+        </a>
+
+        <a href="#discounts" data-page="discounts" class="nav-item flex items-center justify-between px-3 py-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+            <span>Diskon & Voucher</span>
+          </div>
+          <span class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-bold">4 Aktif</span>
+        </a>
+
+        <a href="#settings" data-page="settings" class="nav-item flex items-center justify-between px-3 py-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-slate-100 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Pengaturan Toko</span>
+          </div>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom Profile & Quota -->
+    <div class="p-3 border-t border-[var(--border-subtle)] space-y-2 relative">
+      <div class="p-3 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs space-y-1.5">
+        <div class="flex items-center justify-between text-[var(--text-secondary)] text-[11px] font-medium">
+          <span>Plan Quota (Overheat Pro)</span>
+          <span class="text-indigo-600 dark:text-indigo-400 font-bold font-mono">74%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+          <div class="h-full bg-indigo-600 dark:bg-indigo-500 rounded-full" style="width: 74%"></div>
+        </div>
+      </div>
+
+      <!-- Profile Trigger Button & Popover -->
+      <div class="relative">
+        <div id="btn-profile-dropdown" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-all cursor-pointer select-none">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-slate-800 text-white dark:bg-slate-700 flex items-center justify-center font-bold text-xs">
+              H
+            </div>
+            <div>
+              <div class="text-xs font-bold text-[var(--text-primary)]">Habibullah</div>
+              <div class="text-[10px] text-[var(--text-muted)]">admin@overheat.id</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <!-- Shortcuts Guide Button -->
+            <button id="btn-open-shortcuts" class="p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-mono" title="Pintasan Keyboard (?)">
+              ?
+            </button>
+            <!-- Theme Switcher -->
+            <button id="sidebar-theme-toggle" class="p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all" title="Ganti Tema">
+              <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <svg id="theme-icon-moon" class="w-4 h-4 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Profile Popover Menu (Pops Upwards) -->
+        <div id="profile-popover" class="absolute left-0 right-0 bottom-14 tactile-card p-3 hidden z-50 shadow-2xl space-y-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+          <div class="pb-2 border-b border-[var(--border-subtle)] flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-[var(--text-primary)]">Habibullah</div>
+              <div class="text-[10px] text-[var(--text-muted)]">admin@overheat.id</div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono text-[9px] font-bold border border-indigo-200 dark:border-indigo-500/20">
+              SUPERADMIN
+            </span>
+          </div>
+
+          <div class="space-y-1 text-xs font-medium">
+            <button class="profile-menu-item w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-left" data-action="settings">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              <span>Pengaturan Profil & Toko</span>
+            </button>
+            <button class="profile-menu-item w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-left" data-action="api">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+              <span>API Gateway & Webhook</span>
+            </button>
+            <button class="profile-menu-item w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-left" data-action="logs">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Audit Log Keamanan</span>
+            </button>
+          </div>
+
+          <div class="pt-1.5 border-t border-[var(--border-subtle)]">
+            <button id="btn-logout" class="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md hover:bg-rose-50 dark:hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 transition-colors text-xs font-semibold text-left">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+              <span>Keluar (Sign Out)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ========================================== -->
+  <!-- MAIN WORKSPACE CONTAINER                   -->
+  <!-- ========================================== -->
+  <div class="flex-1 flex flex-col min-w-0">
+    
+    <!-- Top Header Bar -->
+    <header class="h-16 border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] sticky top-0 z-20 px-3 sm:px-8 flex items-center justify-between gap-2 sm:gap-4">
+      
+      <div class="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+        <!-- Mobile Hamburger Button -->
+        <button id="btn-open-mobile-sidebar" class="md:hidden p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] shrink-0" title="Buka Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+
+        <div class="hidden sm:flex items-center gap-2 text-xs font-medium text-[var(--text-muted)] truncate">
+          <span>OVERHEAT</span>
+          <span>/</span>
+          <span class="text-indigo-600 dark:text-indigo-400 font-semibold" id="header-breadcrumb-section">Store Analytics</span>
+          <span>/</span>
+          <span class="text-[var(--text-primary)] font-bold truncate" id="header-breadcrumb-page">Dashboard & Overview</span>
+        </div>
+
+        <button id="btn-open-search" class="tactile-btn flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all w-full max-w-xs">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <span class="truncate hidden xs:inline">Cari order, produk, invoice...</span>
+          <span class="xs:hidden">Cari...</span>
+          <kbd class="ml-auto px-1.5 py-0.5 text-[10px] font-mono bg-black/5 dark:bg-white/10 border border-[var(--border-subtle)] rounded hidden sm:inline-block">⌘K</kbd>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <!-- Currency Switcher (USD vs IDR) -->
+        <button id="btn-currency-toggle" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-mono font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)]" title="Ganti Mata Uang (U)">
+          <span id="currency-label">USD ($)</span>
+        </button>
+
+        <!-- Notification Bell Dropdown -->
+        <div class="relative">
+          <button id="btn-notifications" class="tactile-btn p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] relative" title="Notifikasi">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-600"></span>
+          </button>
+
+          <!-- Notification Popover -->
+          <div id="notifications-popover" class="absolute right-0 mt-2 w-80 tactile-card p-4 hidden z-50 shadow-2xl space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
+              <span class="font-bold text-xs text-[var(--text-primary)]">Notifikasi Terbaru</span>
+              <span class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-bold">3 Baru</span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+                <div class="font-bold text-[var(--text-primary)]">Pembayaran Berhasil</div>
+                <div class="text-[11px] text-[var(--text-muted)] mt-0.5">Jessica Pratama membayar $890 (Enterprise)</div>
+                <div class="text-[10px] text-[var(--text-muted)] font-mono mt-1">2 menit yang lalu</div>
+              </div>
+              <div class="p-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+                <div class="font-bold text-[var(--text-primary)]">Pelanggan Baru Terdaftar</div>
+                <div class="text-[11px] text-[var(--text-muted)] mt-0.5">Alexander Wright bergabung ke Pro Tier</div>
+                <div class="text-[10px] text-[var(--text-muted)] font-mono mt-1">15 menit yang lalu</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gateway Status -->
+        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Gateway Active</span>
+        </div>
+
+        <!-- Add Order Trigger -->
+        <button id="btn-add-order" class="tactile-btn tactile-btn-primary px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <span>+ Buat Pesanan</span>
+        </button>
+      </div>
+
+    </header>
+
+    <!-- Main Views -->
+    <main class="flex-1 p-4 sm:p-8 space-y-6 overflow-y-auto">
+      
+      <!-- ========================================== -->
+      <!-- PAGE 1: DASHBOARD & OVERVIEW               -->
+      <!-- ========================================== -->
+      <section id="page-overview" class="page-view active space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Executive Sales & Revenue Performance</h1>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Ringkasan performa finansial bisnis, konversi checkout, dan data pelanggan secara real-time.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <!-- Sync Data with Shimmer Loader -->
+            <button id="btn-sync-data" class="tactile-btn px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] hover:border-indigo-500/30 text-xs font-semibold flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg id="sync-icon" class="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              Sync Data
+            </button>
+            <button id="btn-export-csv" class="tactile-btn px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] hover:border-indigo-500/30 text-xs font-semibold flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="kpi-grid">
+          <div class="tactile-card p-5 relative overflow-hidden group hover:border-indigo-500/40 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Total Gross Revenue</span>
+              <span class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </span>
+            </div>
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <div class="text-2xl sm:text-3xl font-extrabold font-mono text-[var(--text-primary)] truncate" id="kpi-revenue">$148,820.00</div>
+              <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/20 shrink-0 whitespace-nowrap">
+                ↑ 18.4%
+              </span>
+            </div>
+            <div class="mt-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
+              <span id="kpi-target-label">Target: $120k/bln</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold font-mono">124% Tercapai</span>
+            </div>
+            <svg class="w-full h-6 mt-3 text-indigo-600 dark:text-indigo-400 opacity-80" viewBox="0 0 100 20" preserveAspectRatio="none">
+              <path d="M0,16 Q20,18 40,8 T70,12 T100,2" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="tactile-card p-5 relative overflow-hidden group hover:border-emerald-500/40 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Pelanggan Aktif</span>
+              <span class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </span>
+            </div>
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <div class="text-2xl sm:text-3xl font-extrabold font-mono text-[var(--text-primary)] truncate" id="kpi-customers">4,892</div>
+              <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/20 shrink-0 whitespace-nowrap">
+                ↑ 12.1%
+              </span>
+            </div>
+            <div class="mt-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
+              <span>Retention Rate</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold font-mono">96.8%</span>
+            </div>
+            <div class="flex items-end gap-1.5 h-6 mt-3 pt-1">
+              <div class="flex-1 bg-emerald-500/30 rounded-t h-2"></div>
+              <div class="flex-1 bg-emerald-500/40 rounded-t h-3"></div>
+              <div class="flex-1 bg-emerald-500/60 rounded-t h-4"></div>
+              <div class="flex-1 bg-emerald-500/50 rounded-t h-3"></div>
+              <div class="flex-1 bg-emerald-500 rounded-t h-6"></div>
+            </div>
+          </div>
+
+          <div class="tactile-card p-5 relative overflow-hidden group hover:border-slate-400 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Checkout Conversion</span>
+              <span class="p-2 rounded-lg bg-slate-100 dark:bg-white/10 text-[var(--text-secondary)] border border-[var(--border-subtle)]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              </span>
+            </div>
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <div class="text-2xl sm:text-3xl font-extrabold font-mono text-[var(--text-primary)] truncate">3.84%</div>
+              <span class="text-xs font-mono text-slate-700 dark:text-slate-300 font-bold bg-slate-100 dark:bg-white/10 px-2 py-0.5 rounded-full border border-[var(--border-subtle)] shrink-0 whitespace-nowrap">
+                +0.8% MoM
+              </span>
+            </div>
+            <div class="mt-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
+              <span>Total Pengunjung</span>
+              <span class="text-[var(--text-secondary)] font-mono">128,400 sesi</span>
+            </div>
+            <div class="w-full h-1.5 mt-4 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-slate-800 dark:bg-white" style="width: 38.4%"></div>
+            </div>
+          </div>
+
+          <div class="tactile-card p-5 relative overflow-hidden group hover:border-amber-500/40 transition-all">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Average Order Value</span>
+              <span class="p-2 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              </span>
+            </div>
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <div class="text-2xl sm:text-3xl font-extrabold font-mono text-[var(--text-primary)] truncate" id="kpi-aov">$384.50</div>
+              <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-200 dark:border-amber-500/20 shrink-0 whitespace-nowrap">
+                ↑ 5.4%
+              </span>
+            </div>
+            <div class="mt-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
+              <span>Repeat Buyers</span>
+              <span class="text-amber-600 dark:text-amber-400 font-semibold font-mono">42.1%</span>
+            </div>
+            <svg class="w-full h-6 mt-3 text-amber-600 dark:text-amber-400 opacity-80" viewBox="0 0 100 20" preserveAspectRatio="none">
+              <path d="M0,18 L30,18 L40,8 L60,14 L80,6 L100,10" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Charts Area with Interactive Floating Crosshair Tooltip -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 tactile-card p-6 flex flex-col justify-between relative">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
+              <div>
+                <h3 class="text-base font-bold text-[var(--text-primary)]">Tren Pendapatan & Gross Profit</h3>
+                <p class="text-xs text-[var(--text-muted)] mt-0.5" id="chart-subtitle">Menampilkan data periode: Harian (Senin - Minggu)</p>
+              </div>
+              <div class="flex items-center p-1 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-medium">
+                <button class="btn-timeframe active px-2.5 py-1 rounded-md bg-indigo-600 text-white font-semibold" data-timeframe="harian">Harian</button>
+                <button class="btn-timeframe px-2.5 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]" data-timeframe="mingguan">Mingguan</button>
+                <button class="btn-timeframe px-2.5 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]" data-timeframe="bulanan">Bulanan</button>
+                <button class="btn-timeframe px-2.5 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]" data-timeframe="tahunan">Tahunan</button>
+              </div>
+            </div>
+
+            <!-- Floating Tooltip Box -->
+            <div id="chart-tooltip" class="absolute hidden pointer-events-none p-2.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-medium)] shadow-xl text-xs z-30 transform -translate-x-1/2 -translate-y-full">
+              <div class="text-[10px] text-[var(--text-muted)] font-mono" id="tooltip-date">Minggu 3 (12 Agu)</div>
+              <div class="font-bold text-[var(--text-primary)] font-mono mt-0.5" id="tooltip-rev">Revenue: $14,280</div>
+              <div class="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono" id="tooltip-profit">Laba: $9,400</div>
+            </div>
+
+            <div class="relative w-full h-64 mt-4 select-none cursor-crosshair" id="chart-container">
+              <svg id="revenue-svg" class="w-full h-full" viewBox="0 0 900 260" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="cleanRevGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(79, 70, 229, 0.25)"/>
+                    <stop offset="100%" stop-color="transparent"/>
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="50" x2="900" y2="50" stroke="rgba(150,150,150,0.15)" stroke-dasharray="3"/>
+                <line x1="0" y1="110" x2="900" y2="110" stroke="rgba(150,150,150,0.15)" stroke-dasharray="3"/>
+                <line x1="0" y1="170" x2="900" y2="170" stroke="rgba(150,150,150,0.15)" stroke-dasharray="3"/>
+                <line x1="0" y1="230" x2="900" y2="230" stroke="rgba(150,150,150,0.15)"/>
+
+                <path id="chart-area-fill" d="M0,230 L0,160 C150,110 300,170 450,120 C600,60 750,140 900,40 L900,230 Z" fill="url(#cleanRevGrad)"/>
+                <path id="chart-line-rev" d="M0,160 C150,110 300,170 450,120 C600,60 750,140 900,40" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+                <path id="chart-line-profit" d="M0,190 C150,150 300,195 450,155 C600,110 750,170 900,90" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="4 2"/>
+
+                <!-- Dynamic Crosshair Line -->
+                <line id="chart-crosshair" x1="450" y1="0" x2="450" y2="230" stroke="#4f46e5" stroke-width="1.5" stroke-dasharray="3" class="hidden"/>
+                <circle id="chart-hover-dot" cx="450" cy="90" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2" class="hidden"/>
+              </svg>
+            </div>
+
+            <div class="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs font-mono text-[var(--text-muted)]" id="chart-bottom-labels">
+              <span>Sen</span>
+              <span>Sel</span>
+              <span>Rab</span>
+              <span>Kam</span>
+              <span>Jum</span>
+              <span>Sab</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-bold" id="label-today-rev">Hari Ini ($6.4k)</span>
+            </div>
+          </div>
+
+          <div class="tactile-card p-6 flex flex-col justify-between">
+            <div class="pb-4 border-b border-[var(--border-subtle)]">
+              <h3 class="text-base font-bold text-[var(--text-primary)]">Sumber Kanal Penjualan</h3>
+              <p class="text-xs text-[var(--text-muted)] mt-0.5">Asal traffic pembeli konversi</p>
+            </div>
+
+            <div class="my-4 flex items-center justify-center">
+              <div class="relative w-36 h-36 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" fill="transparent" stroke="rgba(150,150,150,0.15)" stroke-width="10"/>
+                  <circle cx="50" cy="50" r="40" fill="transparent" stroke="#4f46e5" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="138"/>
+                  <circle cx="50" cy="50" r="40" fill="transparent" stroke="#059669" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="175" class="transform rotate-[162deg] origin-center"/>
+                  <circle cx="50" cy="50" r="40" fill="transparent" stroke="#64748b" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="188" class="transform rotate-[270deg] origin-center"/>
+                </svg>
+                <div class="absolute text-center">
+                  <div class="text-lg font-extrabold font-mono text-[var(--text-primary)]" id="donut-total">$148k</div>
+                  <div class="text-[8px] text-[var(--text-muted)] uppercase font-mono tracking-wider">TOTAL</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)]">
+                <span class="flex items-center gap-2 text-[var(--text-secondary)]">
+                  <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> Direct Store
+                </span>
+                <span class="font-bold text-[var(--text-primary)] font-mono">45%</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)]">
+                <span class="flex items-center gap-2 text-[var(--text-secondary)]">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Google Ads
+                </span>
+                <span class="font-bold text-[var(--text-primary)] font-mono">30%</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-surface-raised)]">
+                <span class="flex items-center gap-2 text-[var(--text-secondary)]">
+                  <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Referral
+                </span>
+                <span class="font-bold text-[var(--text-primary)] font-mono">25%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Feed & Products -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 tactile-card p-6 flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">Aktivitas Transaksi Realtime</span>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-[var(--border-subtle)] text-[var(--text-muted)]">LIVE</span>
+            </div>
+
+            <div id="live-sales-stream" class="h-60 my-3 overflow-y-auto space-y-2 text-xs pr-2"></div>
+
+            <div class="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+              <span>Sinkronisasi otomatis aktif</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-medium">Stripe & Gateway Connected</span>
+            </div>
+          </div>
+
+          <div class="tactile-card p-6 flex flex-col justify-between">
+            <div class="pb-3 border-b border-[var(--border-subtle)]">
+              <h3 class="text-base font-bold text-[var(--text-primary)]">Produk Terlaris</h3>
+              <p class="text-xs text-[var(--text-muted)] mt-0.5">Top performa penjualan produk</p>
+            </div>
+
+            <div class="space-y-4 my-3">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-[var(--text-primary)] mb-1">
+                  <span>Enterprise Cloud Suite</span>
+                  <span class="font-mono text-emerald-600 dark:text-emerald-400 font-bold" id="bestseller-1">$68,400</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-600" style="width: 78%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-[var(--text-primary)] mb-1">
+                  <span>Pro Developer Plan</span>
+                  <span class="font-mono text-emerald-600 dark:text-emerald-400 font-bold" id="bestseller-2">$48,200</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-slate-700 dark:bg-slate-300" style="width: 58%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-[var(--text-primary)] mb-1">
+                  <span>Starter Cloud Tier</span>
+                  <span class="font-mono text-emerald-600 dark:text-emerald-400 font-bold" id="bestseller-3">$32,220</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                  <div class="h-full bg-slate-400" style="width: 42%"></div>
+                </div>
+              </div>
+            </div>
+
+            <button class="tactile-btn w-full py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] text-center" onclick="navigateToPage('products')">
+              Kelola Katalog Produk
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 2: REVENUE & DEEP ANALYTICS           -->
+      <!-- ========================================== -->
+      <section id="page-analytics" class="page-view space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Revenue & Financial Analytics</h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Analisis mendalam mengenai Monthly Recurring Revenue (MRR), Customer Cohort, dan persebaran wilayah.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="tactile-card p-5">
+            <span class="text-xs font-mono uppercase text-[var(--text-muted)]">Monthly Recurring Revenue (MRR)</span>
+            <div class="text-3xl font-extrabold font-mono text-[var(--text-primary)] mt-2" id="analytics-mrr">$94,200.00</div>
+            <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-1 font-semibold">↑ 14.2% MoM Expansion</div>
+          </div>
+          <div class="tactile-card p-5">
+            <span class="text-xs font-mono uppercase text-[var(--text-muted)]">Annual Run Rate (ARR)</span>
+            <div class="text-3xl font-extrabold font-mono text-[var(--text-primary)] mt-2" id="analytics-arr">$1,130,400.00</div>
+            <div class="text-xs text-indigo-600 dark:text-indigo-400 mt-1 font-semibold">Proyeksi Q4 Sehat</div>
+          </div>
+          <div class="tactile-card p-5">
+            <span class="text-xs font-mono uppercase text-[var(--text-muted)]">Customer Churn Rate</span>
+            <div class="text-3xl font-extrabold font-mono text-[var(--text-primary)] mt-2">1.24%</div>
+            <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-1 font-semibold">Industri Standar: 3.5%</div>
+          </div>
+        </div>
+
+        <div class="tactile-card p-6">
+          <h3 class="text-base font-bold text-[var(--text-primary)] mb-4">Persebaran Pendapatan Berdasarkan Wilayah</h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="p-4 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] font-medium">United States</div>
+              <div class="text-xl font-bold font-mono text-[var(--text-primary)] mt-1" id="reg-us">$64,800</div>
+              <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">43.5% dari Total</div>
+            </div>
+            <div class="p-4 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] font-medium">Indonesia</div>
+              <div class="text-xl font-bold font-mono text-[var(--text-primary)] mt-1" id="reg-id">$38,200</div>
+              <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">25.6% dari Total</div>
+            </div>
+            <div class="p-4 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] font-medium">European Union</div>
+              <div class="text-xl font-bold font-mono text-[var(--text-primary)] mt-1" id="reg-eu">$27,400</div>
+              <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">18.4% dari Total</div>
+            </div>
+            <div class="p-4 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] font-medium">Japan & APAC</div>
+              <div class="text-xl font-bold font-mono text-[var(--text-primary)] mt-1" id="reg-jp">$18,420</div>
+              <div class="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">12.5% dari Total</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 3: ORDERS & TRANSACTIONS              -->
+      <!-- ========================================== -->
+      <section id="page-orders" class="page-view space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Manajemen Pesanan & Transaksi</h1>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Kelola status pembayaran invoice, cetak kuitansi, dan rincian pembeli.</p>
+          </div>
+          <button class="tactile-btn tactile-btn-primary px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2" onclick="document.getElementById('btn-add-order').click()">
+            + Buat Pesanan Baru
+          </button>
+        </div>
+
+        <div class="tactile-card overflow-hidden">
+          <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-subtle)]">
+            <div class="relative">
+              <input id="orders-search-input" type="text" placeholder="Cari nama, email, invoice ID..." class="w-72 px-3.5 py-1.5 pl-9 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-indigo-600 transition-all">
+              <svg class="w-3.5 h-3.5 text-[var(--text-muted)] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <!-- Density Toggle (Comfortable vs Compact) -->
+              <button id="btn-density-toggle" class="tactile-btn px-3 py-1.5 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+                Kerapatan: <span id="density-label" class="font-bold">Comfort</span>
+              </button>
+
+              <div class="flex items-center p-1 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs">
+                <button class="filter-tab-btn active px-3 py-1 rounded-md bg-indigo-600 text-white font-medium" data-filter="ALL">Semua</button>
+                <button class="filter-tab-btn px-3 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]" data-filter="PAID">Lunas</button>
+                <button class="filter-tab-btn px-3 py-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]" data-filter="PENDING">Menunggu</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table id="main-orders-table" class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[var(--border-subtle)] bg-slate-50 dark:bg-white/[0.02] text-[var(--text-muted)] font-semibold">
+                  <th class="py-3.5 px-4">Pelanggan</th>
+                  <th class="py-3.5 px-4 font-mono">Invoice ID</th>
+                  <th class="py-3.5 px-4">Paket / Produk</th>
+                  <th class="py-3.5 px-4 font-mono">Nominal</th>
+                  <th class="py-3.5 px-4">Status</th>
+                  <th class="py-3.5 px-4">Tanggal</th>
+                  <th class="py-3.5 px-4 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body" class="divide-y divide-[var(--border-subtle)]"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 4: DATA PELANGGAN (CUSTOMERS)         -->
+      <!-- ========================================== -->
+      <section id="page-customers" class="page-view space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Direktori Data Pelanggan</h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Daftar pelanggan aktif, total pengeluaran (LTV), dan riwayat langganan.</p>
+        </div>
+
+        <div class="tactile-card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[var(--border-subtle)] bg-slate-50 dark:bg-white/[0.02] text-[var(--text-muted)] font-semibold">
+                  <th class="py-3.5 px-4">Nama Pelanggan</th>
+                  <th class="py-3.5 px-4">Perusahaan / Organisasi</th>
+                  <th class="py-3.5 px-4 font-mono">Total Transaksi</th>
+                  <th class="py-3.5 px-4 font-mono">Lifetime Value (LTV)</th>
+                  <th class="py-3.5 px-4">Status Akun</th>
+                  <th class="py-3.5 px-4 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[var(--border-subtle)]">
+                <tr class="hover:bg-slate-50 dark:hover:bg-white/[0.03] transition-colors">
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-slate-800 text-white dark:bg-slate-700 flex items-center justify-center font-bold text-xs">J</div>
+                      <div>
+                        <div class="font-bold text-[var(--text-primary)]">Jessica Pratama</div>
+                        <div class="text-[11px] text-[var(--text-muted)]">jessica@perusahaan.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4 text-[var(--text-secondary)]">PT Pratama Solusi</td>
+                  <td class="py-3.5 px-4 font-mono font-semibold text-[var(--text-primary)]">14 Order</td>
+                  <td class="py-3.5 px-4 font-mono font-bold text-emerald-600 dark:text-emerald-400" id="cust-ltv-1">$12,460.00</td>
+                  <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold">ACTIVE VIP</span></td>
+                  <td class="py-3.5 px-4 text-right"><button class="px-2.5 py-1 rounded bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-[var(--text-secondary)]">Profil</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-white/[0.03] transition-colors">
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-slate-800 text-white dark:bg-slate-700 flex items-center justify-center font-bold text-xs">A</div>
+                      <div>
+                        <div class="font-bold text-[var(--text-primary)]">Alexander Wright</div>
+                        <div class="text-[11px] text-[var(--text-muted)]">alex@fintech.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4 text-[var(--text-secondary)]">Fintech IO Global</td>
+                  <td class="py-3.5 px-4 font-mono font-semibold text-[var(--text-primary)]">8 Order</td>
+                  <td class="py-3.5 px-4 font-mono font-bold text-emerald-600 dark:text-emerald-400" id="cust-ltv-2">$6,800.00</td>
+                  <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold">ACTIVE VIP</span></td>
+                  <td class="py-3.5 px-4 text-right"><button class="px-2.5 py-1 rounded bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-[var(--text-secondary)]">Profil</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 5: KATALOG & PAKET (PRODUCTS)         -->
+      <!-- ========================================== -->
+      <section id="page-products" class="page-view space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Katalog Produk & Paket Langganan</h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Konfigurasi harga, batas fitur, dan paket langganan aktif.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="tactile-card p-6 flex flex-col justify-between border-2 border-indigo-600/40">
+            <div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold">POPULAR</span>
+              <h3 class="text-xl font-bold text-[var(--text-primary)] mt-2">Enterprise Cloud Suite</h3>
+              <p class="text-xs text-[var(--text-muted)] mt-1">Solusi penuh untuk perusahaan skala besar & multi-user.</p>
+              <div class="text-3xl font-black font-mono text-[var(--text-primary)] mt-4" id="plan-price-1">$890 <span class="text-xs font-sans text-[var(--text-muted)]">/ bulan</span></div>
+              <ul class="mt-4 space-y-2 text-xs text-[var(--text-secondary)]">
+                <li class="flex items-center gap-2">✓ Unlimited Cloud Quota</li>
+                <li class="flex items-center gap-2">✓ 24/7 Dedicated Support</li>
+                <li class="flex items-center gap-2">✓ Custom Domain & SSL</li>
+              </ul>
+            </div>
+            <button class="tactile-btn tactile-btn-primary w-full py-2.5 rounded-lg text-xs font-bold mt-6">Edit Paket</button>
+          </div>
+
+          <div class="tactile-card p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-[var(--text-secondary)] font-bold">DEVELOPER</span>
+              <h3 class="text-xl font-bold text-[var(--text-primary)] mt-2">Pro Developer Plan</h3>
+              <p class="text-xs text-[var(--text-muted)] mt-1">Untuk tim developer dan agensi digital menengah.</p>
+              <div class="text-3xl font-black font-mono text-[var(--text-primary)] mt-4" id="plan-price-2">$450 <span class="text-xs font-sans text-[var(--text-muted)]">/ bulan</span></div>
+              <ul class="mt-4 space-y-2 text-xs text-[var(--text-secondary)]">
+                <li class="flex items-center gap-2">✓ 500GB Storage Pool</li>
+                <li class="flex items-center gap-2">✓ Full API Access</li>
+                <li class="flex items-center gap-2">✓ 10 Team Members</li>
+              </ul>
+            </div>
+            <button class="tactile-btn w-full py-2.5 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-bold text-[var(--text-primary)] mt-6">Edit Paket</button>
+          </div>
+
+          <div class="tactile-card p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-[var(--text-secondary)] font-bold">STARTER</span>
+              <h3 class="text-xl font-bold text-[var(--text-primary)] mt-2">Starter Cloud Tier</h3>
+              <p class="text-xs text-[var(--text-muted)] mt-1">Untuk solo creator dan bisnis rintisan baru.</p>
+              <div class="text-3xl font-black font-mono text-[var(--text-primary)] mt-4" id="plan-price-3">$120 <span class="text-xs font-sans text-[var(--text-muted)]">/ bulan</span></div>
+              <ul class="mt-4 space-y-2 text-xs text-[var(--text-secondary)]">
+                <li class="flex items-center gap-2">✓ 100GB Storage</li>
+                <li class="flex items-center gap-2">✓ Standar Analytics</li>
+                <li class="flex items-center gap-2">✓ 2 Team Seats</li>
+              </ul>
+            </div>
+            <button class="tactile-btn w-full py-2.5 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-bold text-[var(--text-primary)] mt-6">Edit Paket</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 6: DISKON & VOUCHER                   -->
+      <!-- ========================================== -->
+      <section id="page-discounts" class="page-view space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Diskon & Promo Voucher Toko</h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Buat kode kupon diskon persentase atau nominal untuk kampanye marketing.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="tactile-card p-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 px-2 py-1 rounded border border-indigo-200 dark:border-indigo-500/20">OVERHEAT50</span>
+              <span class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">AKTIF</span>
+            </div>
+            <div class="text-2xl font-bold text-[var(--text-primary)] mt-3">Diskon 50% All Plan</div>
+            <div class="text-xs text-[var(--text-muted)] mt-1">Digunakan 142 kali • Kadaluarsa 31 Des</div>
+          </div>
+          <div class="tactile-card p-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold bg-slate-100 dark:bg-white/10 text-[var(--text-secondary)] px-2 py-1 rounded border border-[var(--border-subtle)]">EARLYBIRD</span>
+              <span class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">AKTIF</span>
+            </div>
+            <div class="text-2xl font-bold text-[var(--text-primary)] mt-3" id="voucher-earlybird">Potongan $100 Flat</div>
+            <div class="text-xs text-[var(--text-muted)] mt-1">Digunakan 88 kali • Kuota sisa 12</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- PAGE 7: PENGATURAN TOKO (SETTINGS)         -->
+      <!-- ========================================== -->
+      <section id="page-settings" class="page-view space-y-6">
+        <div>
+          <h1 class="text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">Pengaturan Sistem & Toko</h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Kelola kredensial API payment gateway, webhook, dan profil instansi.</p>
+        </div>
+
+        <div class="tactile-card p-6 space-y-4 max-w-2xl">
+          <h3 class="text-base font-bold text-[var(--text-primary)] pb-2 border-b border-[var(--border-subtle)]">Konfigurasi Gateway & API</h3>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">NAMA INSTANSI / TOKO</label>
+            <input type="text" value="Overheat Global Hub" class="w-full px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-sm text-[var(--text-primary)] focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">STRIPE / GATEWAY SECRET KEY</label>
+            <div class="flex items-center gap-2">
+              <input type="password" value="sk_live_94829384910293840192849" readonly class="flex-1 px-3.5 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-primary)] focus:outline-none">
+              <button class="tactile-btn px-3 py-2 rounded-lg bg-[var(--bg-surface-raised)] border border-[var(--border-subtle)] text-xs text-[var(--text-primary)]" onclick="navigator.clipboard.writeText('sk_live_94829384910293840192849'); alert('API Key disalin!')">Salin</button>
+            </div>
+          </div>
+          <button class="tactile-btn tactile-btn-primary px-5 py-2.5 rounded-lg text-xs font-bold">Simpan Pengaturan</button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
