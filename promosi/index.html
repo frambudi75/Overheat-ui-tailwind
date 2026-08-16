@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OVERHEAT UI — Executive Tailwind CSS Admin OS & Component Library</title>
-  <meta name="description" content="OVERHEAT UI adalah ekosistem template panel admin & UI kit berbasis Tailwind CSS murni. Desain elegan anti-AI slop, high-contrast, dan siap copy-paste.">
+  <meta name="description" content="Koleksi template admin panel & komponen modular berbasis Tailwind CSS murni. Desain elegan, high-contrast, responsif, dan siap copy-paste.">
   
   <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Standalone Tailwind CSS CDN for instant aaPanel / Docker / Web Server usage -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -47,7 +46,7 @@
       background-size: 32px 32px;
     }
     .light .bg-grid-pattern {
-      background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
     }
     .glass-card {
       background: rgba(21, 25, 36, 0.85);
@@ -66,7 +65,7 @@
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-bold shadow-2xl flex items-center gap-2.5">
       <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-      <span id="toast-msg">Perintah disalin ke clipboard!</span>
+      <span id="toast-msg">Kode komponen berhasil disalin!</span>
     </div>
   </div>
 
@@ -84,9 +83,9 @@
       </div>
 
       <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-400">
-        <a href="#features" class="hover:text-white transition-colors">Fitur Unggulan</a>
-        <a href="#components" class="hover:text-white transition-colors">Komponen</a>
-        <a href="#deploy" class="hover:text-white transition-colors">aaPanel & Docker</a>
+        <a href="#showcase" class="hover:text-white transition-colors">Showcase Dashboard</a>
+        <a href="#components" class="hover:text-white transition-colors">Komponen Modular</a>
+        <a href="#comparison" class="hover:text-white transition-colors">Keunggulan Visual</a>
         <a href="https://github.com/frambudi75/Overheat-ui-tailwind" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
           GitHub
           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -95,7 +94,7 @@
 
       <div class="flex items-center gap-3">
         <a href="/" target="_blank" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-700 active:scale-95 text-white text-xs font-bold transition-all shadow-lg shadow-indigo-600/20 inline-flex items-center gap-2">
-          <span>Buka Panel Demo</span>
+          <span>Buka Live Demo</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
       </div>
@@ -107,18 +106,18 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center space-y-8">
       
       <!-- Top Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-indigo-300">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-indigo-300">
         <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
         <span>Executive Design System • Pure Tailwind CSS v4 & Modular UI Kit</span>
       </div>
 
       <!-- Main Headline -->
       <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
-        Panel Admin Elegan untuk Semua Project Web Anda.
+        Ekosistem UI Panel Admin & Komponen Siap Pakai.
       </h1>
 
       <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
-        Koleksi komponen modular siap <em>copy-paste</em> dengan kontras tinggi, navigasi keyboard power-user, dan estetika minimalis berstandar enterprise.
+        Didesain dengan presisi tinggi, kontras tajam, navigasi keyboard power-user, dan struktur modular yang tinggal di-<em>copy paste</em> ke semua project web Anda.
       </p>
 
       <!-- Action Buttons & Clone Box -->
@@ -128,37 +127,105 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
         </a>
 
-        <div class="w-full sm:w-auto flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-obsidian-800 border border-white/10 text-xs font-mono text-slate-300 select-all cursor-pointer hover:border-white/20 transition-all" onclick="copyGitClone()">
+        <div class="w-full sm:w-auto flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl bg-obsidian-800 border border-white/10 text-xs font-mono text-slate-300 select-all cursor-pointer hover:border-white/20 transition-all" onclick="copySnippet('git clone https://github.com/frambudi75/Overheat-ui-tailwind.git')">
           <span class="text-indigo-400">$</span>
           <span>git clone https://github.com/frambudi75/Overheat-ui-tailwind.git</span>
           <svg class="w-4 h-4 text-slate-400 hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
         </div>
       </div>
 
-      <!-- App Preview Frame -->
-      <div class="pt-10 max-w-5xl mx-auto">
-        <div class="rounded-2xl border border-white/10 shadow-2xl bg-obsidian-800/80 p-2 sm:p-4 backdrop-blur">
-          <div class="flex items-center gap-2 px-3 py-2 border-b border-white/5 text-xs text-slate-400 font-mono">
-            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-            <span class="ml-2 text-slate-500">https://overheat.id/admin/overview</span>
+      <!-- Live Interactive Dashboard Hero Mockup -->
+      <div class="pt-10 max-w-5xl mx-auto" id="showcase">
+        <div class="rounded-2xl border border-white/10 shadow-2xl bg-obsidian-800/90 p-4 sm:p-6 backdrop-blur text-left space-y-6">
+          <div class="flex items-center justify-between border-b border-white/5 pb-4">
+            <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+              <span class="ml-2 text-slate-500 font-bold">OVERHEAT / Executive Dashboard Demo</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-mono font-bold border border-emerald-500/20">LIVE METRICS</span>
+            </div>
           </div>
-          <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left p-2">
-            <div class="p-4 rounded-xl bg-obsidian-700 border border-white/5">
-              <div class="text-xs text-slate-400 uppercase font-mono">Gross Revenue</div>
-              <div class="text-2xl font-extrabold font-mono text-white mt-2">$148,820</div>
-              <div class="text-xs text-emerald-400 mt-1 font-bold">↑ 18.4% Bulan Ini</div>
+
+          <!-- 3 Stat Cards Showcase -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-5 rounded-xl bg-obsidian-700 border border-white/5 relative overflow-hidden group hover:border-indigo-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase text-slate-400">Total Gross Revenue</span>
+                <span class="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">💰</span>
+              </div>
+              <div class="mt-3 flex items-center justify-between">
+                <div class="text-2xl font-extrabold font-mono text-white">$148,820</div>
+                <span class="text-xs font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">↑ 18.4%</span>
+              </div>
+              <svg class="w-full h-5 mt-3 text-indigo-400 opacity-80" viewBox="0 0 100 20" preserveAspectRatio="none">
+                <path d="M0,16 Q20,18 40,8 T70,12 T100,2" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
             </div>
-            <div class="p-4 rounded-xl bg-obsidian-700 border border-white/5">
-              <div class="text-xs text-slate-400 uppercase font-mono">Pelanggan Aktif</div>
-              <div class="text-2xl font-extrabold font-mono text-white mt-2">4,892</div>
-              <div class="text-xs text-emerald-400 mt-1 font-bold">↑ 12.1% Pertumbuhan</div>
+
+            <div class="p-5 rounded-xl bg-obsidian-700 border border-white/5 relative overflow-hidden group hover:border-emerald-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase text-slate-400">Pelanggan Aktif</span>
+                <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">👥</span>
+              </div>
+              <div class="mt-3 flex items-center justify-between">
+                <div class="text-2xl font-extrabold font-mono text-white">4,892</div>
+                <span class="text-xs font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">↑ 12.1%</span>
+              </div>
+              <div class="flex items-end gap-1.5 h-5 mt-3">
+                <div class="flex-1 bg-emerald-500/30 rounded-t h-2"></div>
+                <div class="flex-1 bg-emerald-500/40 rounded-t h-3"></div>
+                <div class="flex-1 bg-emerald-500/60 rounded-t h-4"></div>
+                <div class="flex-1 bg-emerald-500 rounded-t h-5"></div>
+              </div>
             </div>
-            <div class="p-4 rounded-xl bg-obsidian-700 border border-white/5">
-              <div class="text-xs text-slate-400 uppercase font-mono">Multi-Currency</div>
-              <div class="text-2xl font-extrabold font-mono text-indigo-400 mt-2">USD & IDR</div>
-              <div class="text-xs text-slate-400 mt-1">Konversi Real-time</div>
+
+            <div class="p-5 rounded-xl bg-obsidian-700 border border-white/5 relative overflow-hidden group hover:border-amber-500/40 transition-all">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase text-slate-400">Multi-Currency (USD/IDR)</span>
+                <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">💱</span>
+              </div>
+              <div class="mt-3 flex items-center justify-between">
+                <div class="text-2xl font-extrabold font-mono text-amber-400">Rp 2,35 M</div>
+                <span class="text-xs font-mono text-slate-300 font-bold bg-white/5 px-2 py-0.5 rounded-full border border-white/10">Real-time</span>
+              </div>
+              <div class="w-full h-1.5 mt-4 bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-amber-400" style="width: 74%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mini Table Preview in Mockup -->
+          <div class="rounded-xl border border-white/5 bg-obsidian-900/80 overflow-hidden">
+            <div class="p-3 bg-white/[0.02] border-b border-white/5 flex items-center justify-between text-xs font-bold text-slate-300">
+              <span>Transaksi Penjualan Terkini</span>
+              <span class="text-[10px] font-mono text-indigo-400">AUTO SYNC</span>
+            </div>
+            <div class="divide-y divide-white/5 text-xs">
+              <div class="p-3 flex items-center justify-between hover:bg-white/[0.02]">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">J</div>
+                  <div>
+                    <div class="font-bold text-white">Jessica Pratama</div>
+                    <div class="text-[10px] text-slate-400">Enterprise Cloud Suite</div>
+                  </div>
+                </div>
+                <div class="font-mono font-bold text-white">$890.00</div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-mono font-bold">LUNAS</span>
+              </div>
+              <div class="p-3 flex items-center justify-between hover:bg-white/[0.02]">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs">A</div>
+                  <div>
+                    <div class="font-bold text-white">Alexander Wright</div>
+                    <div class="text-[10px] text-slate-400">Pro Developer Plan</div>
+                  </div>
+                </div>
+                <div class="font-mono font-bold text-white">$450.00</div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-mono font-bold">LUNAS</span>
+              </div>
             </div>
           </div>
         </div>
@@ -167,129 +234,201 @@
     </div>
   </section>
 
-  <!-- Features Grid -->
-  <section id="features" class="py-20 border-t border-white/10 bg-obsidian-800/40">
+  <!-- Interactive Component Gallery / Playground -->
+  <section id="components" class="py-20 border-t border-white/10 bg-obsidian-800/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
       <div class="text-center space-y-3 max-w-2xl mx-auto">
-        <h2 class="text-3xl font-extrabold text-white tracking-tight">Dibuat untuk Standar Produk Kelas Dunia</h2>
-        <p class="text-sm text-slate-400">Setiap piksel dan interaksi dirancang untuk memberikan pengalaman pengguna yang sangat cepat, presisi, dan intuitif.</p>
+        <span class="px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 font-mono text-[10px] font-bold border border-indigo-500/20">MODULAR UI VAULT</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Pameran Komponen Interaktif</h2>
+        <p class="text-sm text-slate-400">Setiap komponen dirancang modular agar bisa langsung Anda salin dan tempel ke file HTML, React, Vue, atau Blade Anda.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Feature 1 -->
-        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold">
-            🛡️
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Component 1: Buttons -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <h3 class="font-bold text-sm text-white">🔘 Tactile Physics Buttons</h3>
+              <span class="text-[10px] font-mono text-indigo-400 font-bold">5 Variasi</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Tombol dengan efek pegas aktif dan warna solid tegas.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <button class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-bold transition-all">Primary</button>
+              <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 active:scale-95 text-slate-200 text-xs font-semibold border border-white/10 transition-all">Secondary</button>
+              <button class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 active:scale-95 text-rose-400 text-xs font-bold border border-rose-500/20 transition-all">Delete</button>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white">Swiss Precision & High Contrast</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Dirancang dengan palet warna berbobot dan ergonomis. Mengutamakan mode gelap Obsidian pekat dan mode terang Swiss Slate yang tajam dan nyaman di mata.</p>
+          <button class="w-full py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all text-center" onclick="copySnippet('&lt;button class=&quot;px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-bold shadow-sm transition-all&quot;&gt;Primary&lt;/button&gt;')">
+            📋 Copy Code
+          </button>
         </div>
 
-        <!-- Feature 2 -->
-        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
-            ⌨️
+        <!-- Component 2: Badges -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <h3 class="font-bold text-sm text-white">🏷️ Status Badges & Pills</h3>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold">Audit Status</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Indikator transaksi lunas, pending, dan status VIP.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-[10px] font-bold border border-emerald-500/20">LUNAS</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 font-mono text-[10px] font-bold border border-amber-500/20">PENDING</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 font-mono text-[10px] font-bold border border-indigo-500/20">VIP MEMBER</span>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white">Pintasan Keyboard Power-User</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Operasikan dashboard dengan keyboard: <code>⌘K</code> untuk Command Bar, <code>?</code> untuk menu pintasan, dan <code>G + D/O/A</code> untuk navigasi dua tombol.</p>
+          <button class="w-full py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all text-center" onclick="copySnippet('&lt;span class=&quot;px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-[10px] font-bold border border-emerald-500/20&quot;&gt;LUNAS&lt;/span&gt;')">
+            📋 Copy Code
+          </button>
         </div>
 
-        <!-- Feature 3 -->
-        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">
-            📈
+        <!-- Component 3: Avatars -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <h3 class="font-bold text-sm text-white">👥 Avatars & Team Stacks</h3>
+              <span class="text-[10px] font-mono text-purple-400 font-bold">Online Indicator</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Inisial profil dengan status dot online dan avatar tumpuk.</p>
+            <div class="mt-4 flex items-center gap-4">
+              <div class="relative">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">H</div>
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-obsidian-700"></span>
+              </div>
+              <div class="flex items-center -space-x-2">
+                <div class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-[10px] border border-obsidian-700">J</div>
+                <div class="w-7 h-7 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-[10px] border border-obsidian-700">A</div>
+                <div class="w-7 h-7 rounded-full bg-slate-600 text-slate-200 flex items-center justify-center font-bold text-[9px] border border-obsidian-700">+4</div>
+              </div>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white">Grafik Interaktif & Inspector</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Filter rentang periode Harian, Mingguan, Bulanan, dan Tahunan lengkap dengan garis crosshair dan tooltip melayang saat kursor digerakkan.</p>
+          <button class="w-full py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all text-center" onclick="copySnippet('&lt;div class=&quot;relative&quot;&gt;&lt;div class=&quot;w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs&quot;&gt;H&lt;/div&gt;&lt;span class=&quot;absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500&quot;&gt;&lt;/span&gt;&lt;/div&gt;')">
+            📋 Copy Code
+          </button>
         </div>
 
-        <!-- Feature 4 -->
-        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
-            💵
+        <!-- Component 4: Inputs -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <h3 class="font-bold text-sm text-white">🔍 Search & Shortcuts Bar</h3>
+              <span class="text-[10px] font-mono text-indigo-400 font-bold">⌘K Ready</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Input dengan icon pencarian dan lencana shortcut.</p>
+            <div class="mt-4 relative">
+              <input type="text" placeholder="Cari invoice..." class="w-full px-3 py-1.5 pl-8 pr-10 rounded-lg bg-obsidian-800 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-600">
+              <span class="absolute left-2.5 top-2 text-slate-500 text-xs">🔍</span>
+              <kbd class="absolute right-2 top-2 px-1 py-0.2 text-[9px] font-mono bg-white/5 border border-white/10 rounded text-slate-400">⌘K</kbd>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white">Dual Currency (USD & IDR)</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Format angka otomatis disesuaikan. Di mode Rupiah menggunakan singkatan eksekutif <code>Rp 2,35 M</code> sehingga bebas dari teks terpotong.</p>
+          <button class="w-full py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all text-center" onclick="copySnippet('&lt;div class=&quot;relative&quot;&gt;&lt;input type=&quot;text&quot; placeholder=&quot;Cari...&quot; class=&quot;w-full px-3 py-2 pl-8 rounded-lg bg-slate-900 border border-white/10 text-xs text-white&quot;&gt;&lt;/div&gt;')">
+            📋 Copy Code
+          </button>
         </div>
 
-        <!-- Feature 5 -->
-        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">
-            🧩
+        <!-- Component 5: Toggle Switch -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <h3 class="font-bold text-sm text-white">🎚️ Toggle Switch (iOS Physics)</h3>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold">Smooth State</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Saklar toggle on/off interaktif dengan status aktif.</p>
+            <div class="mt-4 flex items-center gap-3">
+              <label class="inline-flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked class="sr-only peer">
+                <div class="w-10 h-5 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600 relative"></div>
+                <span class="text-xs text-slate-300">Live Gateway</span>
+              </label>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white">Koleksi Komponen Modular</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Tersedia tombol, kartu, tabel data, modal form, switch, avatar, dan banner notifikasi yang siap di-copy-paste ke framework apa pun.</p>
+          <button class="w-full py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all text-center" onclick="copySnippet('&lt;label class=&quot;inline-flex items-center gap-2 cursor-pointer&quot;&gt;&lt;input type=&quot;checkbox&quot; checked class=&quot;sr-only peer&quot;&gt;&lt;div class=&quot;w-10 h-5 bg-white/10 rounded-full peer peer-checked:bg-indigo-600 relative&quot;&gt;&lt;/div&gt;&lt;/label&gt;')">
+            📋 Copy Code
+          </button>
         </div>
 
-        <!-- Feature 6 -->
-        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3 hover:border-indigo-500/40 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold">
-            📱
+        <!-- Component 6: Alert Banner -->
+        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <h3 class="font-bold text-sm text-white">⚠️ Alert & Callout Banner</h3>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold">Feedback UI</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Pesan notifikasi sukses dan peringatan sistem.</p>
+            <div class="mt-4 p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-300 flex items-center gap-2">
+              <span>✓</span>
+              <span>Pembayaran #ORD-94820 terverifikasi.</span>
+            </div>
           </div>
-          <h3 class="text-base font-bold text-white">100% Mobile & Tablet Ready</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Dilengkapi off-canvas drawer slide-in untuk navigasi HP dan layout adaptif untuk segala resolusi layar.</p>
+          <button class="w-full py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 border border-white/10 transition-all text-center" onclick="copySnippet('&lt;div class=&quot;p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300&quot;&gt;Sukses!&lt;/div&gt;')">
+            📋 Copy Code
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Comparison Section -->
+  <section id="comparison" class="py-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+      <div class="text-center space-y-3 max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Kenapa Memilih OVERHEAT UI?</h2>
+        <p class="text-sm text-slate-400">Dirancang khusus untuk developer yang peduli estetika dan kecepatan eksekusi.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3">
+          <div class="text-2xl">⚡</div>
+          <h3 class="font-bold text-base text-white">Bebas Dependensi Rumit</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Dibangun di atas Tailwind CSS v4 murni. Tidak ada package React/Vue aneh yang memberatkan bundle atau menimbulkan konflik dependensi.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3">
+          <div class="text-2xl">💎</div>
+          <h3 class="font-bold text-base text-white">Kontras Tinggi & Presisi</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Mode terang menggunakan Slate 900 pekat yang sangat tajam, mode gelap menggunakan arang Obsidian yang nyaman di mata tanpa silau.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-obsidian-700/60 border border-white/10 space-y-3">
+          <div class="text-2xl">⌨️</div>
+          <h3 class="font-bold text-base text-white">Keyboard Ergonomics</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Dilengkapi navigasi chord dua tombol (`G D`, `G O`, `G A`) dan Command Bar `⌘K` seperti software buatan Linear dan Raycast.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Deploy Guide (aaPanel & Docker) -->
-  <section id="deploy" class="py-20 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-      <div class="text-center space-y-3 max-w-2xl mx-auto">
-        <span class="px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 font-mono text-[10px] font-bold border border-brand-500/20">DEPLOYMENT READY</span>
-        <h2 class="text-3xl font-extrabold text-white tracking-tight">Siap Pasang di aaPanel & Docker</h2>
-        <p class="text-sm text-slate-400">Deploy landing page atau template admin ini ke server VPS Anda hanya dalam 1 menit.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <!-- aaPanel Guide -->
-        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4">
-          <div class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">AA</span>
-            <h3 class="text-base font-bold text-white">Deploy di aaPanel (Nginx / Apache)</h3>
-          </div>
-          <ol class="space-y-2 text-xs text-slate-300 list-decimal list-inside leading-relaxed">
-            <li>Buka menu <strong>Website ➔ Add Site</strong> di dashboard aaPanel.</li>
-            <li>Upload seluruh isi folder ini ke direktori <code>/www/wwwroot/domain-anda.com/</code>.</li>
-            <li>Aktifkan SSL Let's Encrypt dengan 1 klik. Selesai! Web langsung live.</li>
-          </ol>
-        </div>
-
-        <!-- Docker Guide -->
-        <div class="p-6 rounded-2xl bg-obsidian-700 border border-white/10 space-y-4">
-          <div class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">🐳</span>
-            <h3 class="text-base font-bold text-white">Deploy dengan Docker Compose</h3>
-          </div>
-          <p class="text-xs text-slate-400">Cukup jalankan satu perintah di terminal server VPS Anda:</p>
-          <div class="p-3 rounded-lg bg-black/40 border border-white/10 font-mono text-xs text-emerald-400">
-            docker compose up -d
-          </div>
-          <p class="text-[11px] text-slate-400">Container Nginx Alpine super ringan langsung berjalan di port <code>8080</code>.</p>
-        </div>
+  <!-- CTA Banner -->
+  <section class="py-16 border-t border-white/10 bg-brand-700/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-6">
+      <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Siap Membangun Panel Admin Kelas Atas?</h2>
+      <p class="text-sm text-slate-300 max-w-xl mx-auto">Gunakan OVERHEAT UI sekarang untuk project SaaS, dashboard internal, e-commerce, atau panel admin kustom Anda.</p>
+      <div class="flex items-center justify-center gap-4 pt-2">
+        <a href="/" target="_blank" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-xl transition-all">Buka Live Admin Panel ➔</a>
+        <a href="https://github.com/frambudi75/Overheat-ui-tailwind" target="_blank" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all">⭐ Star di GitHub</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-12 border-t border-white/10 bg-obsidian-900 text-center text-xs text-slate-500 space-y-3">
+  <footer class="py-10 border-t border-white/10 bg-obsidian-900 text-center text-xs text-slate-500 space-y-2">
     <div class="flex items-center justify-center gap-2">
-      <div class="w-6 h-6 rounded-md bg-white text-slate-900 flex items-center justify-center font-bold text-xs">O</div>
+      <div class="w-5 h-5 rounded bg-white text-slate-900 flex items-center justify-center font-bold text-xs">O</div>
       <span class="font-extrabold text-white text-sm">OVERHEAT UI</span>
     </div>
-    <p>Dibuat dengan dedikasi tinggi oleh <strong><a href="https://github.com/frambudi75" class="text-slate-300 hover:text-white underline">frambudi75</a></strong>.</p>
-    <p>Lisensi MIT • Open Source untuk komunitas pengembang web.</p>
+    <p>Dibuat oleh <strong><a href="https://github.com/frambudi75" class="text-slate-300 hover:text-white underline">frambudi75</a></strong> • Lisensi MIT Open Source</p>
   </footer>
 
   <script>
-    function copyGitClone() {
-      navigator.clipboard.writeText('git clone https://github.com/frambudi75/Overheat-ui-tailwind.git');
+    function copySnippet(code) {
+      navigator.clipboard.writeText(code);
       const toast = document.getElementById('toast');
       toast.classList.remove('translate-y-20', 'opacity-0');
       setTimeout(() => {
         toast.classList.add('translate-y-20', 'opacity-0');
-      }, 2500);
+      }, 2200);
     }
   </script>
 </body>
