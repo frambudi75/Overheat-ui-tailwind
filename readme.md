@@ -1,131 +1,196 @@
-# 🔥 OVERHEAT UI — Executive Tailwind CSS Admin OS & Design System
+# Overheat UI
+
+> **A premium Tailwind CSS v4 admin UI system and modular component kit for SaaS and business applications.**
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-frambudi75%2FOverheat--ui--tailwind-indigo?logo=github)](https://github.com/frambudi75/Overheat-ui-tailwind)
-[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-v8.0-646cff?logo=vite)](https://vitejs.dev/)
-[![Design](https://img.shields.io/badge/Aesthetic-Executive_Design_System-emerald)](#)
-[![License](https://img.shields.io/badge/License-MIT-gray)](#)
-
-> **OVERHEAT UI** adalah antarmuka panel admin SaaS & eksekutif bisnis modern berbasis **Tailwind CSS v4** murni. Didesain dengan prinsip estetika *World-Class Product* (setara Linear, Stripe, Raycast, & Vercel), memiliki kontras tinggi (*Swiss Studio Light* & *Obsidian Charcoal Dark*), serta kaya akan interaksi *power-user*.
+[![Components](https://img.shields.io/badge/Components-Modular_HTML-emerald)](#component-vault)
+[![License](https://img.shields.io/badge/License-MIT-gray)](LICENSE)
 
 ---
 
-## ✨ Fitur Unggulan (Core Highlights)
+## Overview
 
-### 🎨 1. Desain & Tipografi Standar Enterprise
-* **Obsidian Dark Mode**: Latar arang gelap `#0c0e14` dengan aksen solid indigo & emerald yang nyaman di mata untuk pemakaian jangka panjang.
-* **Swiss Clean Light Mode**: Teks Slate 900 (`#0f172a`) dengan kontras tajam pada latar `#f8fafc` dan border taktil `#e2e8f0`.
-* **Tipografi Presisi**: Kombinasi font Google *Plus Jakarta Sans*, *Inter*, dan *JetBrains Mono*.
+**Overheat UI** is an open-source, framework-agnostic admin dashboard and UI component kit built with pure **Tailwind CSS v4** and modern **Vanilla JavaScript (ES Modules)**. 
 
-### 📊 2. Grafik Finansial Interaktif & Data Point Inspector
-* **Timeframe Switcher Nyata**: Beralih instan antara **Harian**, **Mingguan**, **Bulanan**, dan **Tahunan** dengan interpolasi kurva SVG dinamis.
-* **Crosshair & Floating Glass Tooltip**: Mengarahkan kursor ke atas grafik memunculkan garis penunjuk vertikal dan detail *Gross Revenue* serta *Net Profit*.
-
-### 💳 3. Multi-Currency Switcher (USD `$` & IDR `Rp`)
-* Mengubah seluruh kalkulasi metrik secara real-time dengan menekan tombol **`USD ($)` / `IDR (Rp)`** di header atau menekan tombol shortcut **`U`**.
-* Format Rupiah mengikuti standar perbankan eksekutif (**`Rp 2,35 M`** dan **`Rp 6,07 Jt`**), mencegah teks terpotong / *overflow*.
-
-### ⌨️ 4. Pintasan Keyboard Power-User (*Two-Key Navigation Chord*)
-* Tekan **`?`** untuk membuka dialog panduan shortcut keyboard.
-* **`⌘K` / `Ctrl+K`**: Membuka Command Palette instan dengan pencarian fuzzy.
-* **`G` lalu `D`**: Menuju Dashboard & Overview.
-* **`G` lalu `A`**: Menuju Revenue & Analitik.
-* **`G` lalu `O`**: Menuju Pesanan & Transaksi.
-* **`G` lalu `C`**: Menuju Data Pelanggan.
-* **`G` lalu `P`**: Menuju Katalog & Paket.
-* **`G` lalu `V`**: Menuju Diskon & Voucher.
-* **`G` lalu `S`**: Menuju Pengaturan Toko.
-
-### 📱 5. Responsif 100% (Mobile Drawer & Tablet)
-* Dilengkapi tombol **Hamburger (`☰`)** dan drawer menu *off-canvas* di layar mobile (`< 768px`) dengan backdrop blur.
-
-### 🛠️ 6. Fitur Interaktif Lengkap
-* **Export Real CSV**: Tombol *Export CSV* menghasilkan dan mengunduh file spreadsheet `.csv` transaksi resmi.
-* **Kerapatan Tabel (*Density Toggle*)**: Beralih antara mode *Comfortable* dan *Compact*.
-* **Cetak Kuitansi Resmi PDF**: Tombol unduh kuitansi langsung membuka dialog print sistem browser.
-* **Shimmer Skeleton Loading**: Efek animasi kilau pemuatan data saat tombol *Sync Data* ditekan.
-* **Katalog & Voucher**: Form modal *Edit Paket* dan salin kode promo satu klik.
-* **Menu Profil & Switcher Toko**: Dropdown multi-workspace dan popover profil Superadmin di pojok kiri bawah.
+It provides an enterprise design system featuring crisp dual-theme support (*Obsidian Charcoal Dark* & *Swiss Clean Light*), keyboard-first power-user workflows, interactive financial analytics, and copy-paste ready HTML components that can be dropped into any backend stack (Laravel, Django, Rails, Go) or frontend framework (React, Vue, Svelte).
 
 ---
 
-## 🚀 Panduan Memulai (Quick Start)
+## Core Capabilities
 
-### Prasyarat
-* [Node.js](https://nodejs.org/) versi 18 ke atas
-* NPM atau PNPM / Yarn
+### 1. Dual-Theme Design System
+* **Obsidian Dark (`#0c0e14`)**: Low eye-strain charcoal foundation paired with subtle surface elevation and focused indigo/emerald accents.
+* **Swiss Clean Light (`#f8fafc`)**: High-contrast Slate 900 typography (`#0f172a`) on tactile neutral cards with zero visual muddiness.
+* **Typography Stack**: Engineered using Google *Plus Jakarta Sans*, *Inter*, and *JetBrains Mono*.
 
-### 1. Clone Repositori
-```bash
-git clone https://github.com/frambudi75/Overheat-ui-tailwind.git
-cd Overheat-ui-tailwind
-```
+### 2. Copy-Paste Modular Component Vault
+* Standalone, self-contained HTML component templates located in `components/ui/` ready for immediate 1-click integration.
+* Interactive showcase page (`#components`) with instant clipboard copy and live preview.
 
-### 2. Install Dependensi
-```bash
-npm install
-```
+### 3. Financial Analytics & Chart Inspector
+* **Dynamic Timeframe Switching**: Instant toggle between Daily, Weekly, Monthly, and Annual datasets with dynamic SVG cubic bezier curve interpolation.
+* **Crosshair Cursor Inspector**: Hover-tracking cursor with floating glass tooltip detailing Gross Revenue, Net Profit, and historical data points.
 
-### 3. Jalankan Dev Server
-```bash
-npm run dev
-```
-Buka browser di **`http://localhost:3000/`** atau port yang tampil di terminal.
+### 4. Dual Currency Formatter (USD & IDR)
+* Live currency switching via header button or single-key keyboard shortcut (`U`).
+* Full Indonesian Rupiah (`Rp`) scaling with executive banking notation (`Rp 2,35 M`, `Rp 6,07 Jt`) preventing layout overflow.
 
-### 4. Build untuk Produksi
-```bash
-npm run build
-```
-File siap saji (*production-ready bundle*) akan tersimpan di direktori `dist/`.
+### 5. Power-User Keyboard Navigation
+* **Command Palette (`⌘K` / `Ctrl+K`)**: Instant fuzzy search and route jumping across views and actions.
+* **Two-Key Navigation Chords (`G + Key`)**:
+  * `G` → `D`: Overview & KPI Dashboard
+  * `G` → `A`: Revenue & Financial Analytics
+  * `G` → `O`: Orders & Transactions Table
+  * `G` → `C`: Customer CRM & Profiles
+  * `G` → `P`: Product Catalog & Plans
+  * `G` → `V`: Discounts & Promo Vouchers
+  * `G` → `K`: UI Component Showcase
+  * `G` → `L`: Authentication / Login Screen
+  * `G` → `S`: System & Store Settings
+* **Quick Reference Guide**: Press `?` anywhere to reveal the modal cheat-sheet.
+
+### 6. Interactive Data Table Operations
+* **Floating Bulk Action Bar**: Appears on row checkbox selection with bulk actions (Mark as Paid, Export Selected to CSV, Bulk Delete).
+* **Native CSV Exporter**: Client-side data streaming to downloadable `.csv` spreadsheets.
+* **Table Density Switcher**: Toggle between Comfortable and Compact row heights.
+* **Invoice Modal & Print Optimization**: A4 print-ready tax invoice preview with native browser print triggers.
 
 ---
 
-## 📂 Struktur Repositori
+## Component Vault
+
+All components are located in `components/ui/` and can be copied directly into your project:
+
+| Component | File Path | Description |
+| :--- | :--- | :--- |
+| **Buttons** | [`components/ui/button.html`](components/ui/button.html) | Primary, secondary raised, outline, ghost, and destructive actions. |
+| **Badges** | [`components/ui/badge.html`](components/ui/badge.html) | Status pills (LUNAS, MENUNGGU, REFUND) and customer tier labels. |
+| **Card (KPI)** | [`components/ui/card.html`](components/ui/card.html) | Metric stat cards with trend badges and embedded sparklines. |
+| **Inputs** | [`components/ui/input.html`](components/ui/input.html) | Search inputs with kbd badges, password reveals, and select menus. |
+| **Data Table** | [`components/ui/table.html`](components/ui/table.html) | Sortable table with checkbox selection and customer avatars. |
+| **Dialog / Modal** | [`components/ui/dialog.html`](components/ui/dialog.html) | Backdrop-blurred modal dialogs for order details and edits. |
+| **Chart** | [`components/ui/chart.html`](components/ui/chart.html) | SVG revenue area chart with gradient fills and data grid. |
+| **Accordion** | [`components/ui/accordion.html`](components/ui/accordion.html) | Animated collapsible FAQ items using HTML `<details>`. |
+| **Avatar Stack** | [`components/ui/avatar.html`](components/ui/avatar.html) | User initials with online indicator dot and team overlap stacks. |
+| **Alerts** | [`components/ui/alert.html`](components/ui/alert.html) | Success and warning callout banners with inline SVG icons. |
+| **Switch** | [`components/ui/switch.html`](components/ui/switch.html) | Physics-styled toggle switch with peer-checked state. |
+| **Auth Screen** | [`components/ui/auth.html`](components/ui/auth.html) | Split-screen login & registration layout with security indicators. |
+| **Tax Invoice** | [`components/ui/invoice.html`](components/ui/invoice.html) | Print-optimized A4 invoice receipt with itemized breakdown. |
+
+---
+
+## Project Structure
 
 ```text
 Overheat-ui-tailwind/
-├── docs/                        # Dokumentasi arsitektur, UI/UX, dan design system
-│   ├── DESIGN_SYSTEM.md         # Token CSS, panduan warna, dan tata letak
-│   ├── ui-ux.md                 # Prinsip interaksi mikro dan navigasi
-│   └── rules.md                 # Aturan kontras & Anti-AI Slop
+├── components/
+│   └── ui/                     # Modular copy-paste component templates
+│       ├── accordion.html
+│       ├── alert.html
+│       ├── auth.html
+│       ├── avatar.html
+│       ├── badge.html
+│       ├── button.html
+│       ├── card.html
+│       ├── chart.html
+│       ├── dialog.html
+│       ├── input.html
+│       ├── invoice.html
+│       ├── switch.html
+│       └── table.html
+├── docs/                       # Architecture & design documentation
+│   ├── DESIGN_SYSTEM.md        # CSS tokens and color scales
+│   ├── ui-ux.md                # Interaction principles and keyboard shortcuts
+│   └── rules.md                # Contrast rules and quality guidelines
+├── public/
+│   └── favicon.svg             # Vector brand favicon
 ├── src/
-│   ├── main.js                  # Logika SPA, router hash, format currency, chart inspector
-│   └── style.css                # Variabel CSS tema (Obsidian Dark & Swiss Light)
-├── OVERHEAT_COMPONENTS.md       # Cheatsheet cuplikan kode komponen HTML/Tailwind
-├── index.html                   # Master Single Page Application
-├── vite.config.js               # Konfigurasi Vite & Tailwind v4 Plugin
-└── package.json                 # Skrip proyek dan dependensi
+│   ├── main.js                 # SPA routing, currency conversions, chart inspector
+│   └── style.css               # Tailwind v4 import & CSS custom properties
+├── index.html                  # Master Single-Page Application & Showcase
+├── package.json                # Project dependencies and build scripts
+└── vite.config.js              # Vite bundler configuration
 ```
 
 ---
 
-## 🧩 Contoh Penggunaan Komponen (UI Kit)
+## Quickstart
 
-Semua komponen dirancang agar mudah disalin langsung ke project React, Vue, Svelte, Blade, atau PHP.
+### Prerequisites
+* [Node.js](https://nodejs.org/) (v18.0.0 or higher)
+* `npm`, `pnpm`, or `yarn`
 
-### Kartu KPI Metrik (Stat Card)
-```html
-<div class="p-5 rounded-xl bg-white dark:bg-[#151924] border border-slate-200 dark:border-white/10 shadow-sm">
-  <div class="flex items-center justify-between">
-    <span class="text-xs font-mono uppercase tracking-wider text-slate-500">Total Gross Revenue</span>
-    <span class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-    </span>
-  </div>
-  <div class="mt-4 flex items-center justify-between gap-2">
-    <div class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white">$148,820</div>
-    <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">
-      ↑ 18.4%
-    </span>
-  </div>
-</div>
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/frambudi75/Overheat-ui-tailwind.git
+
+# 2. Enter directory
+cd Overheat-ui-tailwind
+
+# 3. Install dependencies
+npm install
+
+# 4. Start local development server
+npm run dev
 ```
 
-*Lihat panduan lengkap seluruh komponen di [OVERHEAT_COMPONENTS.md](./OVERHEAT_COMPONENTS.md).*
+The application will be accessible at `http://localhost:3000/`.
+
+### Production Build
+
+```bash
+npm run build
+```
+The optimized static bundle will be generated in the `dist/` directory.
 
 ---
 
-## 🤝 Kontribusi & Lisensi
+## Framework Integration
 
-Dibuat dengan dedikasi tinggi oleh **[frambudi75](https://github.com/frambudi75)**.
-Proyek ini didistribusikan di bawah lisensi **MIT License**. Bebas digunakan untuk kebutuhan pribadi, komersial, maupun referensi template SaaS.
+Because Overheat UI uses **standard HTML5 and Tailwind CSS v4 classes**, it requires no framework-specific wrappers:
+
+### Laravel / Blade
+Copy the desired component from `components/ui/*.html` into `resources/views/components/` (e.g., `resources/views/components/stat-card.blade.php`).
+
+### React / Next.js / Vue
+Copy the markup into your JSX/TSX/Vue template and replace `class=` with `className=` where applicable.
+
+---
+
+## Design System Tokens
+
+Colors and spacing are defined using CSS custom properties in `src/style.css`:
+
+```css
+:root {
+  /* Obsidian Dark (Default) */
+  --bg-app: #0c0e14;
+  --bg-sidebar: #10131c;
+  --bg-surface: #151924;
+  --bg-surface-raised: #1c2130;
+  --text-primary: #f8fafc;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --color-primary: #4f46e5;
+  --color-accent: #10b981;
+}
+
+[data-theme="swiss-light"] {
+  /* Swiss Clean Light */
+  --bg-app: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-raised: #f1f5f9;
+  --text-primary: #0f172a;
+  --border-subtle: #e2e8f0;
+}
+```
+
+---
+
+## License
+
+This project is open-source software licensed under the [MIT License](LICENSE).
