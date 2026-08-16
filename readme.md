@@ -3,17 +3,17 @@
 [![GitHub Repo](https://img.shields.io/badge/GitHub-frambudi75%2FOverheat--ui--tailwind-indigo?logo=github)](https://github.com/frambudi75/Overheat-ui-tailwind)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-v8.0-646cff?logo=vite)](https://vitejs.dev/)
-[![Design](https://img.shields.io/badge/Aesthetic-Anti--AI--Slop-emerald)](#)
+[![Design](https://img.shields.io/badge/Aesthetic-Executive_Design_System-emerald)](#)
 [![License](https://img.shields.io/badge/License-MIT-gray)](#)
 
-> **OVERHEAT UI** adalah antarmuka panel admin SaaS & eksekutif bisnis modern berbasis **Tailwind CSS v4** murni. Didesain dengan prinsip estetika *World-Class Product* (setara Linear, Stripe, Raycast, & Vercel), bebas dari gradasi neon murahan (*Anti-AI Slop*), memiliki kontras tinggi (*Swiss Studio Light* & *Obsidian Charcoal Dark*), serta kaya akan interaksi *power-user*.
+> **OVERHEAT UI** adalah antarmuka panel admin SaaS & eksekutif bisnis modern berbasis **Tailwind CSS v4** murni. Didesain dengan prinsip estetika *World-Class Product* (setara Linear, Stripe, Raycast, & Vercel), memiliki kontras tinggi (*Swiss Studio Light* & *Obsidian Charcoal Dark*), serta kaya akan interaksi *power-user*.
 
 ---
 
 ## ✨ Fitur Unggulan (Core Highlights)
 
-### 🎨 1. Desain & Tipografi Bebas *AI-Slop*
-* **Obsidian Dark Mode**: Latar arang gelap `#0c0e14` dengan aksen solid indigo & emerald tanpa glow neon yang melelahkan mata.
+### 🎨 1. Desain & Tipografi Standar Enterprise
+* **Obsidian Dark Mode**: Latar arang gelap `#0c0e14` dengan aksen solid indigo & emerald yang nyaman di mata untuk pemakaian jangka panjang.
 * **Swiss Clean Light Mode**: Teks Slate 900 (`#0f172a`) dengan kontras tajam pada latar `#f8fafc` dan border taktil `#e2e8f0`.
 * **Tipografi Presisi**: Kombinasi font Google *Plus Jakarta Sans*, *Inter*, dan *JetBrains Mono*.
 
