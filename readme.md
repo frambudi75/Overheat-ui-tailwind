@@ -76,6 +76,8 @@ Application Patterns (Absensi, SMAD, IP Management, Finance, NetScope)
 
 ## Component Vault
 
+The Overheat UI component ecosystem is organized into **5 distinct architectural layers**:
+
 ### 1. Core UI Primitives (`components/ui/`)
 | Component | File Path | Description |
 | :--- | :--- | :--- |
