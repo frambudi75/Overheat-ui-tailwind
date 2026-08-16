@@ -1,0 +1,43 @@
+<!-- OVERHEAT UI: Interactive SVG Area Chart with Timeframe Filters -->
+
+<div class="p-6 rounded-xl bg-white dark:bg-[#151924] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-white/10">
+    <div>
+      <h3 class="text-base font-bold text-slate-900 dark:text-white">Tren Pendapatan & Gross Profit</h3>
+      <p class="text-xs text-slate-500 mt-0.5">Perbandingan pendapatan kotor dan laba bersih</p>
+    </div>
+    <div class="flex items-center p-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-medium">
+      <button class="px-2.5 py-1 rounded-md bg-indigo-600 text-white font-semibold">Harian</button>
+      <button class="px-2.5 py-1 rounded-md text-slate-500 hover:text-slate-900 dark:hover:text-white">Mingguan</button>
+      <button class="px-2.5 py-1 rounded-md text-slate-500 hover:text-slate-900 dark:hover:text-white">Bulanan</button>
+    </div>
+  </div>
+
+  <div class="relative w-full h-64 mt-4 select-none">
+    <svg class="w-full h-full" viewBox="0 0 900 260" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="cleanRevGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="rgba(79, 70, 229, 0.25)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="50" x2="900" y2="50" stroke="rgba(150,150,150,0.15)" stroke-dasharray="3"/>
+      <line x1="0" y1="110" x2="900" y2="110" stroke="rgba(150,150,150,0.15)" stroke-dasharray="3"/>
+      <line x1="0" y1="170" x2="900" y2="170" stroke="rgba(150,150,150,0.15)" stroke-dasharray="3"/>
+      <line x1="0" y1="230" x2="900" y2="230" stroke="rgba(150,150,150,0.15)"/>
+
+      <path d="M0,230 L0,160 C150,110 300,170 450,120 C600,60 750,140 900,40 L900,230 Z" fill="url(#cleanRevGrad)"/>
+      <path d="M0,160 C150,110 300,170 450,120 C600,60 750,140 900,40" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+      <path d="M0,190 C150,150 300,195 450,155 C600,110 750,170 900,90" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="4 2"/>
+    </svg>
+  </div>
+
+  <div class="pt-3 border-t border-slate-100 dark:border-white/10 flex items-center justify-between text-xs font-mono text-slate-500">
+    <span>Sen</span>
+    <span>Sel</span>
+    <span>Rab</span>
+    <span>Kam</span>
+    <span>Jum</span>
+    <span class="text-emerald-600 dark:text-emerald-400 font-bold">Hari Ini ($6.4k)</span>
+  </div>
+</div>

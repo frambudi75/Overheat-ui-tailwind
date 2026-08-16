@@ -1,0 +1,44 @@
+<!-- OVERHEAT UI: Data Table Component with Action Buttons & Density Mode -->
+
+<div class="overflow-hidden rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#151924] shadow-sm">
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs border-collapse">
+      <thead>
+        <tr class="border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] text-slate-500 font-semibold">
+          <th class="py-3.5 px-4">Pelanggan</th>
+          <th class="py-3.5 px-4 font-mono">Invoice ID</th>
+          <th class="py-3.5 px-4">Paket / Produk</th>
+          <th class="py-3.5 px-4 font-mono">Nominal</th>
+          <th class="py-3.5 px-4">Status</th>
+          <th class="py-3.5 px-4">Tanggal</th>
+          <th class="py-3.5 px-4 text-right">Aksi</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+        <tr class="hover:bg-slate-50 dark:hover:bg-white/[0.03] transition-colors">
+          <td class="py-3.5 px-4">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-slate-800 text-white dark:bg-slate-700 flex items-center justify-center font-bold text-xs">J</div>
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white">Jessica Pratama</div>
+                <div class="text-[11px] text-slate-500">jessica@perusahaan.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 font-mono text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
+            <span class="bg-slate-100 dark:bg-white/5 px-1.5 py-0.5 rounded border border-slate-200 dark:border-white/10">#ORD-94820</span>
+          </td>
+          <td class="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-medium">Enterprise Cloud Suite</td>
+          <td class="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">$890.00</td>
+          <td class="py-3.5 px-4">
+            <span class="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 font-mono text-[10px] font-bold">LUNAS</span>
+          </td>
+          <td class="py-3.5 px-4 text-slate-500 text-[11px]">Hari ini, 14:20</td>
+          <td class="py-3.5 px-4 text-right">
+            <button class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs border border-slate-200 dark:border-white/10 font-medium">Rincian</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

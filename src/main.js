@@ -130,7 +130,32 @@ const pageMeta = {
   customers: { section: 'CRM', title: 'Data Pelanggan' },
   products: { section: 'Manajemen Produk', title: 'Katalog & Paket' },
   discounts: { section: 'Marketing', title: 'Diskon & Voucher' },
+  components: { section: 'UI Kit & Design System', title: 'Koleksi Komponen UI (Shadcn Style)' },
   settings: { section: 'Sistem', title: 'Pengaturan Toko' },
+};
+
+// Component Snippets for 1-Click Copy (Shadcn Style)
+const uiSnippets = {
+  button: `<button class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-xs font-bold transition-all inline-flex items-center gap-2 shadow-sm">
+  <span>Primary Action</span>
+</button>`,
+  badge: `<span class="px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 font-mono text-[10px] font-bold inline-flex items-center gap-1.5">
+  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+  <span>LUNAS</span>
+</span>`,
+  input: `<div class="relative w-full max-w-sm">
+  <input type="text" placeholder="Cari..." class="w-full px-3.5 py-2 pl-9 pr-12 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-600 transition-all">
+  <kbd class="absolute right-2.5 top-2.5 px-1.5 py-0.5 text-[10px] font-mono bg-black/5 dark:bg-white/10 border border-slate-200 dark:border-white/10 rounded text-slate-500">⌘K</kbd>
+</div>`,
+  card: `<div class="p-5 rounded-xl bg-white dark:bg-[#151924] border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden group hover:border-indigo-500/40 transition-all">
+  <div class="flex items-center justify-between">
+    <span class="text-xs font-mono uppercase tracking-wider text-slate-500">Total Gross Revenue</span>
+  </div>
+  <div class="mt-4 flex items-center justify-between gap-2">
+    <div class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white">$148,820</div>
+    <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full">↑ 18.4%</span>
+  </div>
+</div>`
 };
 
 // Switch Page
@@ -780,6 +805,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (workspaceChevron) workspaceChevron.classList.remove('rotate-180');
     });
   }
+
+  // 1-Click Component Code Copy (Shadcn Style)
+  document.querySelectorAll('.btn-copy-component').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const snippetKey = e.currentTarget.getAttribute('data-snippet');
+      const code = uiSnippets[snippetKey];
+      if (code) {
+        navigator.clipboard.writeText(code);
+        showToast(`Kode komponen "${snippetKey.toUpperCase()}" disalin ke clipboard!`, 'success');
+      }
+    });
+  });
 
   // Edit Package Buttons
   document.querySelectorAll('#page-products button').forEach(btn => {
